@@ -12,11 +12,14 @@
 (function () {
   const CFG = window.HOME_BUILD_CONFIG || {};
   const BUCKET = 'files';
+  function atobSafe(s) { try { return atob((s || '').replace(/-/g, '+').replace(/_/g, '/')); } catch { return ''; } }
   const SIGNED_URL_SECONDS = 60 * 60 * 6;
   const RELOAD_DEBOUNCE_MS = 150;
   const PIXEL = 'data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==';
 
-  const configured = !!(CFG.SUPABASE_URL && CFG.SUPABASE_ANON_KEY && !/YOUR-/.test(CFG.SUPABASE_URL + CFG.SUPABASE_ANON_KEY));
+  const isSecretKey = /^sb_secret_/.test(CFG.SUPABASE_ANON_KEY || '') || /service_role/.test(atobSafe((CFG.SUPABASE_ANON_KEY || '').split('.')[1]));
+  if (isSecretKey) console.error('config.js holds a SECRET key. Use the publishable (or anon) key; the secret key must never be in a website.');
+  const configured = !isSecretKey && !!(CFG.SUPABASE_URL && CFG.SUPABASE_ANON_KEY && !/YOUR-/.test(CFG.SUPABASE_URL + CFG.SUPABASE_ANON_KEY));
   const sb = configured && window.supabase
     ? window.supabase.createClient(CFG.SUPABASE_URL, CFG.SUPABASE_ANON_KEY, { auth: { persistSession: true, autoRefreshToken: true } })
     : null;

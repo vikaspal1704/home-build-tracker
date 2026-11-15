@@ -126,5 +126,5 @@ To send more than a few email links per hour, connect a free email service under
 | `backend.js` | Talks to Supabase: data, live updates, sign-in, files |
 | `config.js` | Your Supabase address and public key |
 | `supabase/schema.sql` | Database tables and access rules, run once |
-| `vendor/` | The Supabase browser library (v2.45.4), included so the site does not depend on a CDN |
+| `vendor/` | The Supabase browser library (v2.118.0), included so the site does not depend on a CDN |
 | `.github/workflows/pages.yml` | Free deploy to GitHub Pages |
