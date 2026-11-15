@@ -99,7 +99,16 @@ const T = {
   access:'Family & access',accessHint:'Only people on this list can open the app. Add their email here, then tell them to open the link and sign in with that email.',
   addMember:'Add person',memberEmail:'Email',memberName:'Name',roleLabel:'What can they do?',roleOwner:'Owner',roleEditor:'Can add and edit',roleViewer:'Can only view',
   remove:'Remove',removeSure:'Tap again to remove',joined:'Has signed in',notJoined:'Not signed in yet',moreAccess:'{n} people can open the app',
-  added:'Added',removed:'Removed',addFail:'Could not add. Is this email already on the list?'},
+  added:'Added',removed:'Removed',addFail:'Could not add. Is this email already on the list?',
+  // per sq ft contracts
+  area:'Built-up area (sq ft)',areaHint:'All floors together, e.g. 3 floors × 1,200 = 3,600',labourPay:'How is labour paid?',
+  lpContract:'Through contractor',lpDaily:'Daily wages by us',costPerSqft:'{a} per sq ft so far',areaShort:'{n} sq ft',
+  contractType:'Type of deal',ctNone:'No fixed deal',ctTurnkey:'Per sq ft, with material',ctLabour:'Per sq ft, labour only',ctFixed:'Fixed total',
+  ratePerSqft:'Rate per sq ft',sqft:'Area (sq ft)',sqftTotal:'Total deal: {a}',rateLine:'{r} / sq ft × {n} sq ft',
+  turnkeyHint:'Contractor buys all material. You should see few material bills of your own.',
+  labourHint:'You buy the material. The contractor pays his workers, so no daily wages from you.',
+  contractLabour:'Labour is paid through the contractor, so there are no daily wages here. Just note who came and what got done.',
+  workersWeek:'Worker-days this week',materialByUs:'Material bought by us',labourPlusMaterial:'Labour + material: {a} ({p} per sq ft)'},
  hi:{home:'होम',money:'खर्चा',tasks:'काम',stages:'चरण',people:'लोग',diary:'साइट डायरी',more:'और',docs:'कागज़ात',decisions:'फ़ैसले',
   defaultName:'हमारा नया घर',addExpense:'खर्चा जोड़ें',addTask:'काम जोड़ें',addPerson:'व्यक्ति जोड़ें',addStage:'चरण जोड़ें',
   spent:'अब तक खर्चा',budget:'बजट',left:'बचा हुआ',over:'बजट से ज़्यादा',noBudget:'अभी बजट तय नहीं है',setBudget:'बजट तय करें',editProject:'प्रोजेक्ट जानकारी',
@@ -168,7 +177,15 @@ const T = {
   access:'परिवार और अनुमति',accessHint:'सिर्फ़ इस सूची के लोग ऐप खोल सकते हैं। यहाँ उनका ईमेल जोड़ें, फिर उन्हें लिंक खोलकर उसी ईमेल से साइन इन करने को कहें।',
   addMember:'व्यक्ति जोड़ें',memberEmail:'ईमेल',memberName:'नाम',roleLabel:'वे क्या कर सकते हैं?',roleOwner:'मालिक',roleEditor:'जोड़ और बदल सकते हैं',roleViewer:'सिर्फ़ देख सकते हैं',
   remove:'हटाएँ',removeSure:'हटाने के लिए फिर दबाएँ',joined:'साइन इन कर चुके',notJoined:'अभी साइन इन नहीं किया',moreAccess:'{n} लोग ऐप खोल सकते हैं',
-  added:'जोड़ दिया',removed:'हटा दिया',addFail:'नहीं जुड़ा। क्या यह ईमेल पहले से सूची में है?'}
+  added:'जोड़ दिया',removed:'हटा दिया',addFail:'नहीं जुड़ा। क्या यह ईमेल पहले से सूची में है?',
+  area:'कुल निर्माण क्षेत्र (वर्ग फ़ुट)',areaHint:'सभी मंज़िलें मिलाकर, जैसे 3 मंज़िल × 1,200 = 3,600',labourPay:'मज़दूरी कैसे दी जाती है?',
+  lpContract:'ठेकेदार के ज़रिए',lpDaily:'हम रोज़ की मज़दूरी देते हैं',costPerSqft:'अब तक {a} प्रति वर्ग फ़ुट',areaShort:'{n} वर्ग फ़ुट',
+  contractType:'सौदे का प्रकार',ctNone:'कोई तय सौदा नहीं',ctTurnkey:'प्रति वर्ग फ़ुट, सामान सहित',ctLabour:'प्रति वर्ग फ़ुट, सिर्फ़ मज़दूरी',ctFixed:'तय कुल रकम',
+  ratePerSqft:'प्रति वर्ग फ़ुट दर',sqft:'क्षेत्र (वर्ग फ़ुट)',sqftTotal:'कुल सौदा: {a}',rateLine:'{r} / वर्ग फ़ुट × {n} वर्ग फ़ुट',
+  turnkeyHint:'सारा सामान ठेकेदार खरीदेगा। आपके अपने सामान के बिल कम होने चाहिए।',
+  labourHint:'सामान आप खरीदेंगे। ठेकेदार अपने मज़दूरों को पैसे देगा, आपको रोज़ की मज़दूरी नहीं देनी।',
+  contractLabour:'मज़दूरी ठेकेदार के ज़रिए दी जाती है, इसलिए यहाँ रोज़ की मज़दूरी नहीं। बस लिखें कौन आया और क्या काम हुआ।',
+  workersWeek:'इस हफ़्ते कारीगर-दिन',materialByUs:'हमने खरीदा सामान',labourPlusMaterial:'मज़दूरी + सामान: {a} ({p} प्रति वर्ग फ़ुट)'}
 };
 const CATS = {
   labour:['Labour','मज़दूरी'], cement_steel:['Cement & Steel','सीमेंट और सरिया'], bricks_sand:['Bricks, Sand & Stone','ईंट, रेत और गिट्टी'],
@@ -262,6 +279,19 @@ const wagesEarned = () => sum(S.diary, dayWages);
 const wagesPaid = () => sum(S.expenses.filter(e=>e.kind==='wages'), e=>num(e.amount));
 const wagesOwed = () => wagesEarned() - wagesPaid();
 const rates = () => ({...DEFAULT_RATES, ...(S.settings.rates||{})});
+/* labour paid through a contractor (per sq ft) means no daily wages to track */
+const dailyWagesMode = () => (S.settings.labourPay || 'contract') === 'daily';
+const MATERIAL_CATS = ['cement_steel','bricks_sand','electrical','plumbing','tiles','wood','paint'];
+const SQFT_DEALS = ['turnkey','labour'];
+const fmtNum = n => Number(n || 0).toLocaleString('en-IN');
+const contractOf = p => p.contract || (num(p.agreed) ? 'fixed' : 'none');
+function contractLine(p){
+  const c = contractOf(p);
+  if (SQFT_DEALS.includes(c) && num(p.rate) && num(p.sqft)) return `${t(c==='turnkey'?'ctTurnkey':'ctLabour')} · ${t('rateLine',{r:money(num(p.rate)), n:fmtNum(p.sqft)})}`;
+  if (SQFT_DEALS.includes(c)) return t(c==='turnkey'?'ctTurnkey':'ctLabour');
+  return c==='fixed' ? t('ctFixed') : '';
+}
+const materialByUs = excludePid => sum(S.expenses.filter(e => MATERIAL_CATS.includes(e.category) && e.paidTo !== excludePid), e=>num(e.amount));
 /* docs derived */
 const docDaysLeft = d => d.expiry ? daysBetween(todayISO(), d.expiry) : null;
 
@@ -381,7 +411,7 @@ function attentionItems(){
   const overdue = S.tasks.filter(x=>x.status!=='done' && x.due && x.due < today).length;
   if (overdue) items.push({tone:'bad', text:t('overdueTasks',{n:overdue}), href:'#tasks'});
   S.milestones.filter(milestoneDue).forEach(m => { const p = personById(m.personId); if (p) items.push({tone:'warn', text:t('milestoneDue',{p:p.name, m:m.title, a:money(num(m.amount))}), act:'pay-milestone', id:m.id}); });
-  const owed = wagesOwed(); if (owed > 0) items.push({tone:'warn', text:t('wagesDue',{a:money(owed)}), act:'pay-wages'});
+  const owed = dailyWagesMode() ? wagesOwed() : 0; if (owed > 0) items.push({tone:'warn', text:t('wagesDue',{a:money(owed)}), act:'pay-wages'});
   S.docs.forEach(d => { const n = docDaysLeft(d); if (n==null || n > EXPIRY_WARN_DAYS) return;
     items.push({tone: n<0?'bad':'warn', text: n<0 ? t('docExpired',{d:d.title}) : t('docExpiring',{d:d.title, n}), act:'edit-doc', id:d.id}); });
   S.decisions.filter(d=>d.status!=='decided' && d.needBy && daysBetween(today, d.needBy) <= DECISION_WARN_DAYS)
@@ -410,7 +440,8 @@ function vHome(){
   <section class="card hero">
     <div class="hero-top">
       <div><div class="label">${esc(t('spent'))}</div><div class="big num">${esc(money(spent))}</div>
-        ${shortMoney(spent)?`<div style="opacity:.85">${esc(shortMoney(spent))}</div>`:''}</div>
+        ${shortMoney(spent)?`<div style="opacity:.85">${esc(shortMoney(spent))}</div>`:''}
+        ${num(S.settings.area)?`<div style="opacity:.9;margin-top:4px">${esc(t('costPerSqft',{a:money(spent/num(S.settings.area))}))} · ${esc(t('areaShort',{n:fmtNum(S.settings.area)}))}</div>`:''}</div>
       ${canWrite()?`<button class="btn sm" data-act="edit-project">${ic('edit')}${esc(t('editProject'))}</button>`:''}
     </div>
     ${budget ? `<div class="bar ${over?'over':''}"><i style="width:${pct.toFixed(1)}%"></i></div>
@@ -500,17 +531,19 @@ function vDiary(){
       ${todayEntry ? `<div><span class="pill done">${esc(t('todayDone'))}</span></div><div class="muted">${esc(workersLine(todayEntry))}</div>` : ''}
       ${canWrite()?`<button class="btn ${todayEntry?'':'primary'}" style="min-height:60px;font-size:17px" data-act="diary-today">${ic(todayEntry?'edit':'plus',2.4)}${esc(todayEntry?t('editToday'):t('writeToday'))}</button>`:''}
     </section>
-    <section class="card" style="display:flex;flex-direction:column;gap:10px">
+    ${!dailyWagesMode() ? `<section class="card" style="display:flex;flex-direction:column;gap:10px">
+      <div><div class="label">${esc(t('workersWeek'))}</div><div style="font-size:22px;font-weight:700" class="num">${sum(S.diary.filter(d=>d.id>=ws), dayWorkers)}</div></div>
+      <p class="small muted" style="margin:0">${esc(t('contractLabour'))}</p></section>` : `<section class="card" style="display:flex;flex-direction:column;gap:10px">
       <div class="hero-stats num">
         <div><div class="label">${esc(t('thisWeek'))}</div><div style="font-size:22px;font-weight:700">${esc(money(weekEarned))}</div><div class="small muted">${esc(t('wagesEarned'))}</div></div>
         <div><div class="label">${esc(owed>=0?t('wagesOwed'):t('paidAhead'))}</div><div style="font-size:22px;font-weight:700;color:${owed>0?'var(--warn)':'var(--good)'}">${esc(money(Math.abs(owed)))}</div></div>
       </div>
       ${owed>0 && canWrite() ? `<button class="btn" data-act="pay-wages">${ic('money')}${esc(t('payWages'))}</button>` : ''}
-    </section>
+    </section>`}
   </div>
   ${!days.length ? `<section class="card">${emptyBox('diary', t('noDiary'))}</section>` :
     groups.map(g=>`<section class="card"><div class="month" style="padding-top:0"><span>${esc(monthLabel(g.m+'-01'))}</span></div>${g.items.map(d=>{
-      const st = stageById(d.stageId); const w = dayWages(d);
+      const st = stageById(d.stageId); const w = dailyWagesMode() ? dayWages(d) : 0;
       return `<div class="day"><div class="day-head"><div><h3>${esc(fmtDay(d.id))}</h3><div class="small muted">${esc([st?stageLabel(st):'', workersLine(d)].filter(Boolean).join(' · '))}</div></div>
         <div style="display:flex;gap:8px;align-items:center">${w?`<b class="num">${esc(money(w))}</b>`:''}${canWrite()?`<button class="iconbtn" data-act="edit-diary" data-id="${esc(d.id)}" aria-label="${esc(t('diaryFor',{d:fmtDate(d.id)}))}">${ic('edit')}</button>`:''}</div></div>
         ${d.note?`<p>${esc(d.note)}</p>`:''}${thumbs(d.photos)}</div>`; }).join('')}</section>`).join('')}
@@ -672,7 +705,7 @@ function vPeople(){
     const m = personMoney(p); const dueN = milestonesOf(p.id).filter(milestoneDue).length;
     return `<section class="card person">
       <button class="who" data-act="open-person" data-id="${esc(p.id)}" style="border:0;background:none;padding:0;text-align:left;cursor:pointer;width:100%">
-        <div class="avatar">${esc(initials(p.name))}</div><div style="flex:1;min-width:0"><h3 style="font-size:17px;overflow-wrap:anywhere">${esc(p.name)}</h3><div class="muted small">${esc(pick(ROLES,p.role||'other'))}</div></div>
+        <div class="avatar">${esc(initials(p.name))}</div><div style="flex:1;min-width:0"><h3 style="font-size:17px;overflow-wrap:anywhere">${esc(p.name)}</h3><div class="muted small">${esc(pick(ROLES,p.role||'other'))}</div>${contractLine(p)?`<div class="small num" style="font-weight:600">${esc(contractLine(p))}</div>`:''}</div>
         <span style="width:22px;color:var(--muted)">${ic('right')}</span></button>
       ${phoneBox(p)}
       ${moneyTriple(m)}
@@ -690,7 +723,11 @@ function vPerson(p){
     <div class="who"><div class="avatar">${esc(initials(p.name))}</div><div style="flex:1;min-width:0"><h2 style="overflow-wrap:anywhere">${esc(p.name)}</h2><div class="muted">${esc(pick(ROLES,p.role||'other'))}</div></div>
       ${canWrite()?`<button class="iconbtn" data-act="edit-person" data-id="${esc(p.id)}" aria-label="${esc(t('editPerson'))}">${ic('edit')}</button>`:''}</div>
     ${phoneBox(p)}
+    ${contractLine(p)?`<div><span class="pill info num">${esc(contractLine(p))}</span></div>`:''}
     ${moneyTriple(m)}
+    ${contractOf(p)==='labour' ? (()=>{ const mat = materialByUs(p.id); const area = num(p.sqft) || num(S.settings.area); const both = m.ag + mat;
+      return `<div class="small" style="display:flex;flex-direction:column;gap:2px"><span>${esc(t('materialByUs'))}: <b class="num">${esc(money(mat))}</b></span>
+        <span class="muted num">${esc(t('labourPlusMaterial',{a:money(both), p: area ? money(both/area) : '—'}))}</span></div>`; })() : ''}
     ${m.adv>0?`<div><span class="pill doing">${esc(t('advNotAdj'))}: ${esc(money(m.adv))}</span></div>`:''}
     ${p.notes?`<div class="small muted">${esc(p.notes)}</div>`:''}
     ${canWrite()?`<button class="btn primary" style="min-height:56px;font-size:17px" data-act="pay-person" data-id="${esc(p.id)}">${ic('money')}${esc(t('payPerson',{n:p.name}))}</button>`:''}
@@ -813,18 +850,23 @@ function fieldHTML(f, v){
   }
   else if (f.type==='labour'){
     const r = f.rates || {};
-    html = `<div class="field"><div class="flabel">${esc(f.label)}</div><div class="labour">${WORKERS.map(k=>`
-      <div class="lrow"><div class="lname">${esc(t(WORKER_KEY[k]))}</div>
+    html = `<div class="field"><div class="flabel">${esc(f.label)}</div>${f.noRates?`<p class="hint" style="margin:0">${esc(t('contractLabour'))}</p>`:''}<div class="labour">${WORKERS.map(k=>`
+      <div class="lrow ${f.noRates?'norate':''}"><div class="lname">${esc(t(WORKER_KEY[k]))}</div>
         <div class="stepper"><button type="button" class="iconbtn" data-act="step" data-for="f_c_${k}" data-d="-1" aria-label="−">${ic('minus',2.6)}</button>
           <input id="f_c_${k}" name="c_${k}" inputmode="numeric" value="${num(f.values?.['c_'+k])}" aria-label="${esc(t(WORKER_KEY[k]))}" data-labour>
           <button type="button" class="iconbtn" data-act="step" data-for="f_c_${k}" data-d="1" aria-label="+">${ic('plus',2.6)}</button></div>
-        <div class="rate"><input id="f_r_${k}" name="r_${k}" inputmode="numeric" value="${num(f.values?.['r_'+k] ?? r[k])}" aria-label="${esc(t('rate'))}" data-labour><span>${esc(t('perDay'))}</span></div>
-      </div>`).join('')}</div><div class="total-line num" id="wageTotal"></div></div>`;
+        ${f.noRates ? '' : `<div class="rate"><input id="f_r_${k}" name="r_${k}" inputmode="numeric" value="${num(f.values?.['r_'+k] ?? r[k])}" aria-label="${esc(t('rate'))}" data-labour><span>${esc(t('perDay'))}</span></div>`}
+      </div>`).join('')}</div>${f.noRates ? '' : '<div class="total-line num" id="wageTotal"></div>'}</div>`;
   }
-  else if (f.type==='row') return `<div class="two">${f.fields.map(x=>fieldHTML(x, f.values?.[x.key])).join('')}</div>`;
+  else if (f.type==='row'){
+    const row = `<div class="two">${f.fields.map(x=>fieldHTML(x, f.values?.[x.key])).join('')}</div>`;
+    return f.showIf ? `<div data-show-if="${esc(f.showIf[0])}=${esc(f.showIf[1])}">${row}</div>` : row;
+  }
+  else if (f.type==='note') html = `<p class="hint" style="margin:0" ${f.id?`id="${f.id}"`:''}>${esc(f.text||'')}</p>`;
+  else if (f.type==='calc') html = `<div class="total-line num" id="${f.id}"></div>`;
   else {
     const type = f.type || 'text';
-    html = `<div class="field">${lab}<input id="${id}" name="${f.key}" type="${type}" ${f.list?`list="${id}_dl"`:''} placeholder="${esc(f.ph||'')}" value="${esc(val)}">${f.list?`<datalist id="${id}_dl">${f.list.map(x=>`<option value="${esc(x)}">`).join('')}</datalist>`:''}${f.hint?`<div class="hint">${esc(f.hint)}</div>`:''}</div>`;
+    html = `<div class="field">${lab}<input id="${id}" name="${f.key}" type="${type}" ${f.numeric?'inputmode="numeric" autocomplete="off"':''} ${f.list?`list="${id}_dl"`:''} placeholder="${esc(f.ph||'')}" value="${esc(val)}">${f.list?`<datalist id="${id}_dl">${f.list.map(x=>`<option value="${esc(x)}">`).join('')}</datalist>`:''}${f.hint?`<div class="hint">${esc(f.hint)}</div>`:''}</div>`;
   }
   return f.showIf ? `<div data-show-if="${esc(f.showIf[0])}=${esc(f.showIf[1])}">${html}</div>` : html;
 }
@@ -833,7 +875,12 @@ function amountHint(id, n, pctOf){
   return `<div class="hint num" data-hint-for="${id}" ${pctOf?`data-pct-of="${pctOf}"`:''}>${esc(parts.join(' · '))}</div>`;
 }
 function applyShowIf(form){
-  form.querySelectorAll('[data-show-if]').forEach(w => { const [k,v] = w.dataset.showIf.split('='); const el = form.elements[k]; w.hidden = !el || el.value !== v; });
+  form.querySelectorAll('[data-show-if]').forEach(w => { const [k,v] = w.dataset.showIf.split('='); const el = form.elements[k]; w.hidden = !el || !v.split('|').includes(el.value); });
+}
+function updateSqftTotal(){
+  const box = $('#sqftTotal'); if (!box) return;
+  const total = num($('#f_rate')?.value) * num($('#f_sqft')?.value);
+  box.textContent = total ? [t('sqftTotal',{a:money(total)}), shortMoney(total)].filter(Boolean).join(' · ') : '';
 }
 function updateWageTotal(){
   const box = $('#wageTotal'); if (!box) return;
@@ -855,7 +902,7 @@ function openForm(cfg){
       </div></form></div></div>`;
   sheet = {...cfg, removed:new Set()};
   const form = $('#sheetForm');
-  applyShowIf(form); updateWageTotal();
+  applyShowIf(form); updateWageTotal(); updateSqftTotal();
   if (!cfg.edit) setTimeout(()=>{ if (!form.contains(document.activeElement)) form.querySelector('input:not([type=radio]):not([type=file]):not([type=checkbox]), textarea')?.focus(); }, 30);
   form.addEventListener('change', () => applyShowIf(form));
   form.addEventListener('submit', async ev => {
@@ -906,7 +953,7 @@ function expenseForm(e, opts={}){
     fields: [
       {key:'title', label:t('whatFor'), ph:t('whatForPh')},
       {type:'row', fields:[{key:'amount', type:'amount', label:t('amount')}, {key:'date', type:'date', label:t('date'), default:todayISO()}]},
-      {key:'kind', type:'seg', label:t('kind'), default:'payment', options:[{v:'payment',l:t('kPayment')},{v:'advance',l:t('kAdvance')},{v:'wages',l:t('kWages')}]},
+      {key:'kind', type:'seg', label:t('kind'), default:'payment', options:[{v:'payment',l:t('kPayment')},{v:'advance',l:t('kAdvance')}, ...(dailyWagesMode() || e.kind==='wages' ? [{v:'wages',l:t('kWages')}] : [])]},
       {key:'adjusted', type:'check', label:t('adjusted'), showIf:['kind','advance']},
       {key:'paidTo', type:'select', label:t('paidTo'), options:peopleOptions()},
       {key:'category', type:'select', label:t('category'), default:'labour', options:Object.keys(CATS).map(k=>({v:k,l:pick(CATS,k)}))},
@@ -948,11 +995,20 @@ function personForm(p){
       {key:'name', label:t('name')},
       {key:'role', type:'select', label:t('role'), default:'contractor', options:Object.keys(ROLES).map(k=>({v:k,l:pick(ROLES,k)}))},
       {key:'phone', type:'tel', label:t('phone')},
-      {key:'agreed', type:'amount', label:t('agreedAmt'), hint:t('agreedHint')},
+      {key:'contract', type:'seg', label:t('contractType'), default:contractOf(p),
+        options:[{v:'turnkey',l:t('ctTurnkey')},{v:'labour',l:t('ctLabour')},{v:'fixed',l:t('ctFixed')},{v:'none',l:t('ctNone')}]},
+      {type:'note', text:t('turnkeyHint'), showIf:['contract','turnkey']},
+      {type:'note', text:t('labourHint'), showIf:['contract','labour']},
+      {type:'row', showIf:['contract','turnkey|labour'], fields:[{key:'rate', type:'amount', label:t('ratePerSqft')}, {key:'sqft', label:t('sqft'), numeric:true, default: S.settings.area ? String(S.settings.area) : ''}]},
+      {type:'calc', id:'sqftTotal', showIf:['contract','turnkey|labour']},
+      {key:'agreed', type:'amount', label:t('agreedAmt'), hint:t('agreedHint'), showIf:['contract','fixed']},
       {key:'notes', type:'textarea', label:t('notes'), ph:t('notesPh')}
     ],
-    validate: v => !v.name.trim() ? t('needName') : '',
-    onSave: v => saveDoc('people', p.id, {name:v.name.trim(), role:v.role, phone:v.phone.trim(), agreed:num(v.agreed), notes:v.notes.trim()}),
+    validate: v => !v.name.trim() ? t('needName') : (SQFT_DEALS.includes(v.contract) && !(num(v.rate) && num(v.sqft))) ? t('needAmount') : '',
+    onSave: v => { const c = v.contract || 'none'; const perSqft = SQFT_DEALS.includes(c);
+      return saveDoc('people', p.id, {name:v.name.trim(), role:v.role, phone:v.phone.trim(), contract:c,
+        rate: perSqft ? num(v.rate) : 0, sqft: perSqft ? num(v.sqft) : 0,
+        agreed: perSqft ? num(v.rate) * num(v.sqft) : c==='fixed' ? num(v.agreed) : 0, notes:v.notes.trim()}); },
     onDelete: edit ? async () => { await S.db.doc('people/'+p.id).delete(); S.personId = null; } : null });
 }
 function milestoneForm(personId, m){
@@ -986,7 +1042,7 @@ function diaryForm(date){
     meta: edit && v.addedBy ? t('addedBy',{n:nameOf(v.addedBy)}) : '',
     fields: [
       {type:'row', fields:[{key:'date', type:'date', label:t('date')}, {key:'stageId', type:'select', label:t('stage'), default:currentStageId(), options:stageOptions()}]},
-      {key:'labour', type:'labour', label:t('workers'), rates:r},
+      {key:'labour', type:'labour', label:t('workers'), rates:r, noRates:!dailyWagesMode()},
       {key:'note', type:'textarea', label:t('whatHappened'), ph:t('whatPh')},
       {key:'photos', type:'files', label:t('photos'), accept:'image/*', existing: v.photos || []}
     ],
@@ -996,7 +1052,7 @@ function diaryForm(date){
       const added = await uploadFiles($('#f_photos'));
       const data = {date:newDate, stageId:vals.stageId, note:(vals.note||'').trim(), photos:[...kept, ...added], updatedAt:Date.now(),
         addedBy: v.addedBy || S.myId || ''};
-      WORKERS.forEach(k => { data['c_'+k] = num(vals['c_'+k]); data['r_'+k] = num(vals['r_'+k]); });
+      WORKERS.forEach(k => { data['c_'+k] = num(vals['c_'+k]); data['r_'+k] = dailyWagesMode() ? num(vals['r_'+k]) : 0; });
       const existingTarget = S.diary.find(x=>x.id===newDate);
       if (newDate !== date && existingTarget) throw new Error('exists');
       await S.db.doc('diary/'+newDate).set(data);
@@ -1070,10 +1126,12 @@ function projectForm(){
       {key:'name', label:t('projectName')},
       {type:'row', fields:[{key:'budget', type:'amount', label:t('budget')}, {key:'currency', type:'select', label:t('currency'), default:'INR', options:CURRENCIES.map(c=>({v:c,l:c}))}]},
       {type:'row', fields:[{key:'startDate', type:'date', label:t('startDate')}, {key:'moveIn', type:'date', label:t('moveDate')}]},
+      {key:'area', label:t('area'), numeric:true, hint:t('areaHint')},
+      {key:'labourPay', type:'seg', label:t('labourPay'), default:'contract', options:[{v:'contract',l:t('lpContract')},{v:'daily',l:t('lpDaily')}]},
       {key:'address', label:t('address')}
     ],
     validate: v => !v.name.trim() ? t('needName') : '',
-    onSave: v => S.db.doc('settings/project').set(clean({...S.settings, name:v.name.trim(), budget:num(v.budget), currency:v.currency||'INR', startDate:v.startDate, moveIn:v.moveIn, address:v.address.trim(), updatedAt:Date.now()})) });
+    onSave: v => S.db.doc('settings/project').set(clean({...S.settings, name:v.name.trim(), budget:num(v.budget), currency:v.currency||'INR', startDate:v.startDate, moveIn:v.moveIn, area:num(v.area), labourPay:v.labourPay||'contract', address:v.address.trim(), updatedAt:Date.now()})) });
 }
 
 /* ---------- events ---------- */
@@ -1198,6 +1256,7 @@ document.addEventListener('input', ev => {
     if (h) h.textContent = n ? [money(n), shortMoney(n), pctOf ? t('pctOfAgreed',{p:Math.round(n/pctOf*100)}) : ''].filter(Boolean).join(' · ') : '';
   }
   if (el.matches('[data-labour]')) updateWageTotal();
+  if (el.id==='f_rate' || el.id==='f_sqft') updateSqftTotal();
   if (el.dataset.filter){ S.f[el.dataset.filter] = el.value; render(); }
 });
 document.addEventListener('change', async ev => {

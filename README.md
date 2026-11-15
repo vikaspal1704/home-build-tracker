@@ -5,7 +5,8 @@ It works on phones and computers, in English and हिंदी.
 
 - **Money:** every payment, advances to contractors, and how much is still owed.
 - **Contractor installments:** split the agreed amount by stage and pay each one when the work is done.
-- **Site diary:** who came to work each day, their wages, what got done, with photos.
+- **Per sq ft contracts:** "with material" or "labour only". The total is worked out from rate × area, and Home shows the cost per sq ft so far.
+- **Site diary:** who came to work each day, what got done, with photos. Daily wages are tracked only if you pay labour yourself.
 - **Tasks and stages:** what needs doing next, and how far the build has got.
 - **Documents:** approvals, agreements, drawings, bills and warranties, with expiry reminders.
 - **Decisions:** tiles, colours and fittings, with photos, family votes and the final choice.
