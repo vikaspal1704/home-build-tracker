@@ -7,7 +7,7 @@
  * Never put a SECRET key (sb_secret_... or service_role) here: it skips every rule.
  */
 window.HOME_BUILD_CONFIG = {
-  SUPABASE_URL: 'https://YOUR-PROJECT.supabase.co',
+  SUPABASE_URL: 'https://bpcbnjaojglbkprplbvs.supabase.co',
   SUPABASE_ANON_KEY: 'sb_publishable_SGippEuc2y2uNxXSV7oJiA_UzbTGFQS',
   // Set to true after turning on Google in Supabase > Authentication > Providers.
   GOOGLE_SIGN_IN: false
