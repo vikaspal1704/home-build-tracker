@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Our Home Build</title>
+<meta name="description" content="One place for the family to track expenses, contractor payments, site diary, documents and decisions while rebuilding the house.">
+<meta name="theme-color" content="#2f4a56">
+<meta name="robots" content="noindex">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Crect width='24' height='24' rx='5' fill='%23f2b705'/%3E%3Cpath d='M5 11.5l7-5.5 7 5.5M7 10.5V18h10v-7.5' fill='none' stroke='%231c1a10' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;700;800&family=Inter:wght@400;500;600&family=Noto+Sans+Devanagari:wght@400;500;600;700&display=swap">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<header class="top">
+  <div class="wrap">
+    <div class="brand">
+      <div class="mark" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11l9-7 9 7"/><path d="M5 10v10h14V10"/><path d="M10 20v-6h4v6"/></svg></div>
+      <h1 id="projName">Our Home Build</h1>
+    </div>
+    <nav class="tabs" id="tabs" aria-label="Sections"></nav>
+    <button class="lang" id="langBtn" type="button" data-act="lang" aria-label="Language / भाषा"><span lang="en">EN</span><span lang="hi">हिंदी</span></button>
+  </div>
+</header>
+<main class="wrap" id="main" aria-live="polite"></main>
+<div id="modal"></div>
+<div id="toast" class="toast" hidden></div>
+
+<script src="vendor/supabase-2.45.4.min.js"></script>
+<script src="config.js"></script>
+<script src="backend.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
