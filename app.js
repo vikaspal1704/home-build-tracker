@@ -87,11 +87,13 @@ const T = {
   // more
   language:'Language',moreDocs:'{n} papers',moreDec:'{n} to decide',morePeople:'{n} people',moreStages:'{a} of {b} done',
   // sign in + access
-  signInTitle:'Sign in to open your home project',signInHint:'Use the email the owner added for you. We will send a 6-digit code, no password needed.',
-  emailLabel:'Your email',emailPh:'name@gmail.com',sendCode:'Send code',codeSent:'We sent a 6-digit code to {e}. Check your inbox, and the spam folder too.',
-  codeLabel:'Code from the email',signIn:'Sign in',otherEmail:'Use a different email',withGoogle:'Continue with Google',or:'or',
-  badEmail:'Please enter a valid email.',badCode:'That code did not work. Check it, or send a new one.',sendFail:'Could not send the code. Wait a minute and try again.',
-  sending:'Sending…',checking:'Checking…',
+  signInTitle:'Sign in to open your home project',signInHint:'Use the email the owner added for you. No password needed.',
+  emailLabel:'Your email',emailPh:'name@gmail.com',sendLink:'Email me a sign-in link',linkSentTitle:'Check your email',
+  linkSent:'We sent a sign-in link to {e}. Open that email on this phone and tap the link. Look in the spam folder too.',
+  otherEmail:'Use a different email',sendAgain:'Send the link again',withGoogle:'Continue with Google',or:'or sign in with email',
+  badEmail:'Please enter a valid email.',linkExpired:'That sign-in link has expired or was already used. Send a new one below.',
+  sendFail:'Could not send the email. Wait a minute and try again.',tooMany:'Too many sign-in emails right now. Try again in an hour, or use Google sign-in.',
+  sending:'Sending…',
   noAccessTitle:'This email is not on the family list',noAccessBody:'You are signed in as {e}. Ask the owner to add this email under More → Family & access, then open this page again.',
   signOut:'Sign out',setupTitle:'Almost ready',setupBody:'The owner still needs to connect the database. Follow the steps in README.md: add the Supabase address and key to config.js.',
   access:'Family & access',accessHint:'Only people on this list can open the app. Add their email here, then tell them to open the link and sign in with that email.',
@@ -154,11 +156,13 @@ const T = {
   noDecisions:'परिवार को जो चुनना है वो लिखें: टाइल, पेंट का रंग, किचन का डिज़ाइन। फ़ोटो के साथ विकल्प जोड़ें और वोट करें।',
   noOptions:'अभी कोई विकल्प नहीं। तुलना के लिए 2-3 जोड़ें।',optionsCount:'{n} विकल्प',
   language:'भाषा',moreDocs:'{n} कागज़',moreDec:'{n} तय करने बाकी',morePeople:'{n} लोग',moreStages:'{b} में से {a} पूरे',
-  signInTitle:'अपना घर प्रोजेक्ट खोलने के लिए साइन इन करें',signInHint:'वही ईमेल डालें जो मालिक ने आपके लिए जोड़ा है। हम 6 अंकों का कोड भेजेंगे, पासवर्ड नहीं चाहिए।',
-  emailLabel:'आपका ईमेल',emailPh:'name@gmail.com',sendCode:'कोड भेजें',codeSent:'{e} पर 6 अंकों का कोड भेजा है। इनबॉक्स और स्पैम फ़ोल्डर दोनों देखें।',
-  codeLabel:'ईमेल में आया कोड',signIn:'साइन इन करें',otherEmail:'दूसरा ईमेल डालें',withGoogle:'Google से जारी रखें',or:'या',
-  badEmail:'कृपया सही ईमेल डालें।',badCode:'यह कोड नहीं चला। जाँचें, या नया कोड मँगाएँ।',sendFail:'कोड नहीं भेजा जा सका। एक मिनट रुककर फिर कोशिश करें।',
-  sending:'भेज रहे हैं…',checking:'जाँच रहे हैं…',
+  signInTitle:'अपना घर प्रोजेक्ट खोलने के लिए साइन इन करें',signInHint:'वही ईमेल डालें जो मालिक ने आपके लिए जोड़ा है। पासवर्ड नहीं चाहिए।',
+  emailLabel:'आपका ईमेल',emailPh:'name@gmail.com',sendLink:'साइन इन लिंक ईमेल करें',linkSentTitle:'अपना ईमेल देखें',
+  linkSent:'{e} पर साइन इन लिंक भेजा है। वह ईमेल इसी फ़ोन पर खोलें और लिंक दबाएँ। स्पैम फ़ोल्डर भी देखें।',
+  otherEmail:'दूसरा ईमेल डालें',sendAgain:'लिंक फिर भेजें',withGoogle:'Google से जारी रखें',or:'या ईमेल से साइन इन करें',
+  badEmail:'कृपया सही ईमेल डालें।',linkExpired:'यह साइन इन लिंक पुराना हो गया या पहले इस्तेमाल हो चुका है। नीचे से नया मँगाएँ।',
+  sendFail:'ईमेल नहीं भेजा जा सका। एक मिनट रुककर फिर कोशिश करें।',tooMany:'अभी बहुत ज़्यादा साइन इन ईमेल भेजे गए। एक घंटे बाद कोशिश करें, या Google से साइन इन करें।',
+  sending:'भेज रहे हैं…',
   noAccessTitle:'यह ईमेल परिवार की सूची में नहीं है',noAccessBody:'आप {e} से साइन इन हैं। मालिक से कहें कि इसे और → परिवार और अनुमति में जोड़ें, फिर यह पेज दोबारा खोलें।',
   signOut:'साइन आउट',setupTitle:'लगभग तैयार',setupBody:'मालिक को अभी डेटाबेस जोड़ना है। README.md के कदम देखें: config.js में Supabase का पता और key डालें।',
   access:'परिवार और अनुमति',accessHint:'सिर्फ़ इस सूची के लोग ऐप खोल सकते हैं। यहाँ उनका ईमेल जोड़ें, फिर उन्हें लिंक खोलकर उसी ईमेल से साइन इन करने को कहें।',
@@ -549,35 +553,31 @@ function vMore(){
 /* ---------- Sign in ---------- */
 function vSignIn(){
   const a = S.auth;
-  const google = Backend.googleEnabled ? `<button type="button" class="btn" data-act="google" style="min-height:56px">${esc(t('withGoogle'))}</button><div class="muted small" style="text-align:center">${esc(t('or'))}</div>` : '';
+  const google = Backend.googleEnabled ? `<button type="button" class="btn primary" data-act="google" style="min-height:56px;font-size:17px">${GOOGLE_MARK}${esc(t('withGoogle'))}</button><div class="muted small" style="text-align:center">${esc(t('or'))}</div>` : '';
   const body = a.step==='email'
     ? `${google}<form class="f" id="authForm" novalidate><div class="field"><label for="authEmail">${esc(t('emailLabel'))}</label>
         <input id="authEmail" type="email" inputmode="email" autocomplete="email" placeholder="${esc(t('emailPh'))}" value="${esc(a.email)}"></div>
         ${a.err?`<div class="err">${esc(a.err)}</div>`:''}
-        <button class="btn primary" type="submit" style="min-height:56px;font-size:17px" ${a.busy?'disabled':''}>${esc(a.busy?t('sending'):t('sendCode'))}</button></form>`
-    : `<form class="f" id="authForm" novalidate><p style="margin:0">${esc(t('codeSent',{e:a.email}))}</p>
-        <div class="field"><label for="authCode">${esc(t('codeLabel'))}</label>
-        <input id="authCode" inputmode="numeric" autocomplete="one-time-code" maxlength="10" style="font-size:24px;letter-spacing:.3em;text-align:center" placeholder="••••••"></div>
+        <button class="btn ${Backend.googleEnabled?'':'primary'}" type="submit" style="min-height:56px;font-size:17px" ${a.busy?'disabled':''}>${esc(a.busy?t('sending'):t('sendLink'))}</button></form>`
+    : `<h3 style="font-size:19px">${esc(t('linkSentTitle'))}</h3><p style="margin:0">${esc(t('linkSent',{e:a.email}))}</p>
         ${a.err?`<div class="err">${esc(a.err)}</div>`:''}
-        <button class="btn primary" type="submit" style="min-height:56px;font-size:17px" ${a.busy?'disabled':''}>${esc(a.busy?t('checking'):t('signIn'))}</button>
-        <button class="btn ghost" type="button" data-act="auth-back">${esc(t('otherEmail'))}</button></form>`;
+        <button class="btn" type="button" data-act="auth-resend" ${a.busy?'disabled':''}>${esc(a.busy?t('sending'):t('sendAgain'))}</button>
+        <button class="btn ghost" type="button" data-act="auth-back">${esc(t('otherEmail'))}</button>`;
   return `<section class="card authcard"><h2>${esc(t('signInTitle'))}</h2><p class="muted" style="margin:0">${esc(t('signInHint'))}</p>${body}</section>`;
+}
+const GOOGLE_MARK = '<svg viewBox="0 0 24 24" aria-hidden="true" style="width:20px;height:20px"><path fill="#4285F4" d="M23.5 12.3c0-.8-.1-1.6-.2-2.3H12v4.5h6.5a5.6 5.6 0 0 1-2.4 3.6v3h3.9c2.3-2.1 3.5-5.2 3.5-8.8z"/><path fill="#34A853" d="M12 24c3.2 0 6-1.1 7.9-2.9l-3.9-3c-1.1.7-2.4 1.2-4 1.2-3.1 0-5.7-2.1-6.6-4.9h-4v3.1A12 12 0 0 0 12 24z"/><path fill="#FBBC05" d="M5.4 14.4a7.2 7.2 0 0 1 0-4.7V6.6h-4a12 12 0 0 0 0 10.8z"/><path fill="#EA4335" d="M12 4.8c1.7 0 3.3.6 4.5 1.8l3.4-3.4A12 12 0 0 0 1.4 6.6l4 3.1C6.3 6.9 8.9 4.8 12 4.8z"/></svg>';
+async function sendSignInLink(){
+  const a = S.auth;
+  a.busy = true; a.err = ''; render();
+  try { await Backend.auth.sendLink(a.email); a.step = 'sent'; }
+  catch (e) { a.err = (e?.status === 429 || /rate|too many/i.test(e?.message || '')) ? t('tooMany') : t('sendFail'); }
+  a.busy = false; render();
 }
 async function handleAuthSubmit(){
   const a = S.auth; if (a.busy) return;
-  a.err = '';
-  if (a.step==='email'){
-    const email = ($('#authEmail')?.value || '').trim().toLowerCase(); a.email = email;
-    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)){ a.err = t('badEmail'); render(); return; }
-    a.busy = true; render();
-    try { await Backend.auth.sendCode(email); a.step = 'code'; } catch { a.err = t('sendFail'); }
-    a.busy = false; render(); setTimeout(()=>$('#authCode')?.focus(), 30); return;
-  }
-  const code = ($('#authCode')?.value || '').replace(/\D/g,'');
-  if (code.length < 6){ a.err = t('badCode'); render(); return; }
-  a.busy = true; render();
-  try { await Backend.auth.verifyCode(a.email, code); } catch { a.err = t('badCode'); a.busy = false; render(); return; }
-  a.busy = false;
+  const email = ($('#authEmail')?.value || '').trim().toLowerCase(); a.email = email;
+  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)){ a.err = t('badEmail'); render(); return; }
+  await sendSignInLink();
 }
 
 /* ---------- Family & access ---------- */
@@ -1091,6 +1091,7 @@ document.addEventListener('click', async ev => {
     case 'sign-out': Backend.auth.signOut(); break;
     case 'google': Backend.auth.google().catch(()=>{ S.auth.err = t('sendFail'); render(); }); break;
     case 'auth-back': S.auth = {step:'email', email:S.auth.email, busy:false, err:''}; render(); break;
+    case 'auth-resend': if (!S.auth.busy) sendSignInLink(); break;
     case 'remove-member': {
       if (armedDelete !== el){ armedDelete = el; el.classList.add('armed'); el.textContent = t('removeSure'); setTimeout(()=>{ if (armedDelete===el){ armedDelete=null; el.classList.remove('armed'); el.textContent=t('remove'); } }, 4000); break; }
       armedDelete = null; el.disabled = true;
@@ -1236,7 +1237,7 @@ async function boot(){
   Backend.onFileUrls(scheduleRender);
   await Backend.start(async info => {
     S.email = info.email || '';
-    if (info.state !== 'ready'){ S.state = info.state; render(); return; }
+    if (info.state !== 'ready'){ if (info.linkError) S.auth.err = t('linkExpired'); S.state = info.state; render(); return; }
     S.role = info.role; S.canWrite = info.role==='owner' || info.role==='editor';
     S.db = Backend.db; S.user = Backend.user; S.assets = S.canWrite ? Backend.assets : null;
     try { S.myId = await Backend.user.id(); } catch {}

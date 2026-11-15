@@ -17,7 +17,7 @@ Vercel, Netlify or Cloudflare Pages.
 
 ---
 
-## Setup (about 15 minutes, one time)
+## Setup (about 15 minutes, one time, all free)
 
 ### 1. Create the free database
 
@@ -28,22 +28,14 @@ Vercel, Netlify or Cloudflare Pages.
 4. On the **last line**, replace `YOUR-EMAIL@example.com` with the email you will sign in with.
 5. Click **Run**. You should see "Success". (Running it again later is safe.)
 
-### 2. Turn on sign-in with a 6-digit code
+### 2. Sign-in: nothing to set up for email links
 
-The app signs people in with a code sent to their email, so nobody needs a password.
+People sign in with a **link sent to their email**, with no password. This uses Supabase's
+standard email exactly as it comes, so it works on the free plan with no template changes.
 
-1. In Supabase, go to **Authentication → Emails** (called **Email Templates** in some versions).
-2. Open the **Magic Link** template and replace its body with:
-   ```html
-   <h2>Your sign-in code</h2>
-   <p>Enter this code in the Home Build app: <strong>{{ .Token }}</strong></p>
-   ```
-3. Do the same for the **Confirm signup** template, because people who are signing in for the first time get this one.
-4. Go to **Authentication → URL Configuration** and set **Site URL** to your website address from step 4 below.
-
-The free plan sends only a few emails per hour, which is enough for one family. If you
-hit the limit, add your own email sender under **Authentication → Emails → SMTP Settings**.
-Gmail, Brevo and Resend all have free tiers.
+The built-in sender only sends a few emails per hour. That is fine for a family, because
+each phone stays signed in after the first time. To remove the limit, turn on
+**Continue with Google** (see "Google sign-in" below). It is free and sends no emails at all.
 
 ### 3. Connect the app to the database
 
@@ -72,7 +64,15 @@ are on your family list read or change anything. **Never** put the `service_role
 Netlify and Cloudflare Pages work the same way as Vercel: import the repo, no build command,
 publish the repo root.
 
-### 5. Invite the family
+### 5. Point sign-in links at your site
+
+In Supabase, go to **Authentication → URL Configuration**:
+- **Site URL:** your site address, for example `https://<your-username>.github.io/home-build-tracker/`
+- **Redirect URLs:** add the same address.
+
+Without this, the link in the sign-in email opens the wrong page.
+
+### 6. Invite the family
 
 1. Open your site, choose a language, and sign in with the email you put in `schema.sql`.
 2. Go to **More → Family & access** and add each person's email:
@@ -84,12 +84,30 @@ On a phone, use the browser menu → **Add to Home screen**, and it opens like a
 
 ---
 
-## Optional: "Continue with Google"
+## Google sign-in (free, recommended for parents)
 
-1. Follow Supabase's guide to turn on **Authentication → Providers → Google**.
-   You need a free Google Cloud OAuth client.
-2. Add your site address to **Authentication → URL Configuration → Redirect URLs**.
-3. In `config.js`, set `GOOGLE_SIGN_IN: true`.
+It needs one tap, sends no email, and has no limit. Each person must use the Google account
+whose email is on your family list.
+
+1. Go to [console.cloud.google.com](https://console.cloud.google.com) and create a project (any name).
+2. Open **Google Auth Platform** (or **APIs & Services → OAuth consent screen**):
+   - **Branding:** app name `Our Home Build`, plus your email as the support and contact email.
+   - **Audience:** choose **External**, then click **Publish app** so any Google account can sign in.
+     Only basic sign-in details are used, so Google does not need to review it.
+3. Go to **Clients → Create client → Web application**:
+   - **Authorized JavaScript origins:** `https://<your-username>.github.io`
+   - **Authorized redirect URIs:** the **Callback URL** shown in Supabase under
+     **Authentication → Sign In / Providers → Google**. It looks like
+     `https://<project-ref>.supabase.co/auth/v1/callback`.
+4. Copy the **Client ID** and **Client secret** into that Supabase Google page, switch it on, and click **Save**.
+5. In `config.js`, set `GOOGLE_SIGN_IN: true` and commit.
+
+The sign-in screen then shows **Continue with Google** at the top, with email links underneath as a backup.
+
+## Optional: more sign-in emails
+
+To send more than a few email links per hour, connect a free email service under
+**Authentication → Emails → SMTP Settings**. For example, Brevo's free plan sends 300 emails a day.
 
 ## Good to know
 

@@ -155,12 +155,12 @@
 
   /* ---------- sign in ---------- */
   const auth = {
-    async sendCode(email) {
-      const { error } = await sb.auth.signInWithOtp({ email: email.trim().toLowerCase(), options: { shouldCreateUser: true } });
-      fail(error);
-    },
-    async verifyCode(email, code) {
-      const { error } = await sb.auth.verifyOtp({ email: email.trim().toLowerCase(), token: code.trim(), type: 'email' });
+    // Supabase's standard (free) email contains a sign-in link back to this page.
+    async sendLink(email) {
+      const { error } = await sb.auth.signInWithOtp({
+        email: email.trim().toLowerCase(),
+        options: { shouldCreateUser: true, emailRedirectTo: location.origin + location.pathname }
+      });
       fail(error);
     },
     async google() {
@@ -177,12 +177,16 @@
    *   {state:'noaccess', email}            signed in, but not on the family list
    *   {state:'ready', email, role}         signed in member; db/user/assets usable
    */
+  // A sign-in link that expired or was already used comes back as #error=...
+  const linkError = /(^|[#&])error(_code)?=/.test(location.hash);
+  if (linkError) history.replaceState(null, '', location.pathname + location.search);
+
   async function start(onState) {
     if (!sb) { onState({ state: 'setup' }); return; }
     let reported = null;
     const resolve = async s => {
       session = s;
-      if (!s) { role = null; if (reported !== 'signin') { reported = 'signin'; onState({ state: 'signin' }); } return; }
+      if (!s) { role = null; if (reported !== 'signin') { reported = 'signin'; onState({ state: 'signin', linkError }); } return; }
       const email = s.user.email || '';
       const displayName = s.user.user_metadata?.full_name || s.user.user_metadata?.name || '';
       const { data, error } = await sb.rpc('claim_membership', { display_name: displayName });
