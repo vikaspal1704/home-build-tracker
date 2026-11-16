@@ -285,3 +285,7 @@ form.f{display:flex;flex-direction:column;gap:14px}
 .f .seg:has(> label:nth-child(4)):not(:has(> label:nth-child(5))){display:grid;grid-template-columns:1fr 1fr}
 .f .seg:has(> label:nth-child(4)):not(:has(> label:nth-child(5))) > label:nth-child(-n+2){border-bottom:1px solid var(--line)}
 .f .seg:has(> label:nth-child(4)):not(:has(> label:nth-child(5))) > label:nth-child(2n){border-right:0}
+/* invite links */
+.invite{display:flex;flex-direction:column;gap:10px;padding:14px;border:1px solid var(--line);border-radius:12px}
+.invite.fresh{border-color:var(--good);background:var(--good-bg)}
+.invite .split .btn{flex:1 1 auto}

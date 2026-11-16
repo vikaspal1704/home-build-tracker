@@ -87,7 +87,7 @@ const T = {
   // more
   language:'Language',moreDocs:'{n} papers',moreDec:'{n} to decide',morePeople:'{n} people',moreStages:'{a} of {b} done',
   // sign in + access
-  signInTitle:'Sign in to open your home project',signInHint:'Use the email the owner added for you. No password needed.',
+  signInTitle:'Sign in to open your home project',signInHint:'Use the email the owner added for you. No password needed.',signInHintInvite:'Use the email you check most often. No password needed.',
   emailLabel:'Your email',emailPh:'name@gmail.com',sendLink:'Email me a sign-in link',linkSentTitle:'Check your email',
   linkSent:'We sent a sign-in link to {e}. Open that email on this phone and tap the link. Look in the spam folder too.',
   otherEmail:'Use a different email',sendAgain:'Send the link again',withGoogle:'Continue with Google',or:'or sign in with email',
@@ -96,7 +96,7 @@ const T = {
   sending:'Sending…',
   noAccessTitle:'This email is not on the family list',noAccessBody:'You are signed in as {e}. Ask the owner to add this email under More → Family & access, then open this page again.',
   signOut:'Sign out',setupTitle:'Almost ready',setupBody:'The owner still needs to connect the database. Follow the steps in README.md: add the Supabase address and key to config.js.',
-  access:'Family & access',accessHint:'Only people on this list can open the app. Add their email here, then tell them to open the link and sign in with that email.',
+  access:'Family & access',accessHint:'Only people on this list can open the app. The easiest way to add family is an invite link: send it on WhatsApp and they join when they sign in.',
   addMember:'Add person',memberEmail:'Email',memberName:'Name',roleLabel:'What can they do?',roleOwner:'Owner',roleEditor:'Can add and edit',roleViewer:'Can only view',
   remove:'Remove',removeSure:'Tap again to remove',joined:'Has signed in',notJoined:'Not signed in yet',moreAccess:'{n} people can open the app',
   added:'Added',removed:'Removed',addFail:'Could not add. Is this email already on the list?',
@@ -108,7 +108,14 @@ const T = {
   turnkeyHint:'Contractor buys all material. You should see few material bills of your own.',
   labourHint:'You buy the material. The contractor pays his workers, so no daily wages from you.',
   contractLabour:'Labour is paid through the contractor, so there are no daily wages here. Just note who came and what got done.',
-  workersWeek:'Worker-days this week',materialByUs:'Material bought by us',labourPlusMaterial:'Labour + material: {a} ({p} per sq ft)'},
+  workersWeek:'Worker-days this week',
+  inviteTitle:'Invite link',inviteHint:'Anyone who opens this link and signs in joins your project. Share it only with family and people you trust. A link stops working after 7 days.',
+  inviteRole:'People who join with it can',createInvite:'Create invite link',copyLink:'Copy link',linkCopied:'Link copied',shareLink:'Share',whatsapp:'WhatsApp',
+  turnOff:'Turn off',turnOffSure:'Tap again to turn off',expiresOn:'Works until {d}',joinedN:'{n} joined',orByEmail:'Or add someone by email',
+  inviteMsg:'Join our home build app. Tap the link and sign in with your email:\nहमारे घर के ऐप से जुड़ें। लिंक दबाएँ और अपने ईमेल से साइन इन करें:\n{u}',
+  invitedBanner:'You have been invited to join this family’s home project. Sign in to join.',
+  inviteBadTitle:'This invite link no longer works',inviteBadBody:'It has expired or was turned off. Ask the owner to send you a new link. You are signed in as {e}.',
+  joinedToast:'Welcome! You have joined the project.',linkOff:'Link turned off',materialByUs:'Material bought by us',labourPlusMaterial:'Labour + material: {a} ({p} per sq ft)'},
  hi:{home:'होम',money:'खर्चा',tasks:'काम',stages:'चरण',people:'लोग',diary:'साइट डायरी',more:'और',docs:'कागज़ात',decisions:'फ़ैसले',
   defaultName:'हमारा नया घर',addExpense:'खर्चा जोड़ें',addTask:'काम जोड़ें',addPerson:'व्यक्ति जोड़ें',addStage:'चरण जोड़ें',
   spent:'अब तक खर्चा',budget:'बजट',left:'बचा हुआ',over:'बजट से ज़्यादा',noBudget:'अभी बजट तय नहीं है',setBudget:'बजट तय करें',editProject:'प्रोजेक्ट जानकारी',
@@ -165,7 +172,7 @@ const T = {
   noDecisions:'परिवार को जो चुनना है वो लिखें: टाइल, पेंट का रंग, किचन का डिज़ाइन। फ़ोटो के साथ विकल्प जोड़ें और वोट करें।',
   noOptions:'अभी कोई विकल्प नहीं। तुलना के लिए 2-3 जोड़ें।',optionsCount:'{n} विकल्प',
   language:'भाषा',moreDocs:'{n} कागज़',moreDec:'{n} तय करने बाकी',morePeople:'{n} लोग',moreStages:'{b} में से {a} पूरे',
-  signInTitle:'अपना घर प्रोजेक्ट खोलने के लिए साइन इन करें',signInHint:'वही ईमेल डालें जो मालिक ने आपके लिए जोड़ा है। पासवर्ड नहीं चाहिए।',
+  signInTitle:'अपना घर प्रोजेक्ट खोलने के लिए साइन इन करें',signInHint:'वही ईमेल डालें जो मालिक ने आपके लिए जोड़ा है। पासवर्ड नहीं चाहिए।',signInHintInvite:'वह ईमेल डालें जो आप सबसे ज़्यादा देखते हैं। पासवर्ड नहीं चाहिए।',
   emailLabel:'आपका ईमेल',emailPh:'name@gmail.com',sendLink:'साइन इन लिंक ईमेल करें',linkSentTitle:'अपना ईमेल देखें',
   linkSent:'{e} पर साइन इन लिंक भेजा है। वह ईमेल इसी फ़ोन पर खोलें और लिंक दबाएँ। स्पैम फ़ोल्डर भी देखें।',
   otherEmail:'दूसरा ईमेल डालें',sendAgain:'लिंक फिर भेजें',withGoogle:'Google से जारी रखें',or:'या ईमेल से साइन इन करें',
@@ -174,7 +181,7 @@ const T = {
   sending:'भेज रहे हैं…',
   noAccessTitle:'यह ईमेल परिवार की सूची में नहीं है',noAccessBody:'आप {e} से साइन इन हैं। मालिक से कहें कि इसे और → परिवार और अनुमति में जोड़ें, फिर यह पेज दोबारा खोलें।',
   signOut:'साइन आउट',setupTitle:'लगभग तैयार',setupBody:'मालिक को अभी डेटाबेस जोड़ना है। README.md के कदम देखें: config.js में Supabase का पता और key डालें।',
-  access:'परिवार और अनुमति',accessHint:'सिर्फ़ इस सूची के लोग ऐप खोल सकते हैं। यहाँ उनका ईमेल जोड़ें, फिर उन्हें लिंक खोलकर उसी ईमेल से साइन इन करने को कहें।',
+  access:'परिवार और अनुमति',accessHint:'सिर्फ़ इस सूची के लोग ऐप खोल सकते हैं। परिवार को जोड़ने का सबसे आसान तरीका जुड़ने का लिंक है: WhatsApp पर भेजें, साइन इन करते ही वे जुड़ जाएँगे।',
   addMember:'व्यक्ति जोड़ें',memberEmail:'ईमेल',memberName:'नाम',roleLabel:'वे क्या कर सकते हैं?',roleOwner:'मालिक',roleEditor:'जोड़ और बदल सकते हैं',roleViewer:'सिर्फ़ देख सकते हैं',
   remove:'हटाएँ',removeSure:'हटाने के लिए फिर दबाएँ',joined:'साइन इन कर चुके',notJoined:'अभी साइन इन नहीं किया',moreAccess:'{n} लोग ऐप खोल सकते हैं',
   added:'जोड़ दिया',removed:'हटा दिया',addFail:'नहीं जुड़ा। क्या यह ईमेल पहले से सूची में है?',
@@ -185,7 +192,14 @@ const T = {
   turnkeyHint:'सारा सामान ठेकेदार खरीदेगा। आपके अपने सामान के बिल कम होने चाहिए।',
   labourHint:'सामान आप खरीदेंगे। ठेकेदार अपने मज़दूरों को पैसे देगा, आपको रोज़ की मज़दूरी नहीं देनी।',
   contractLabour:'मज़दूरी ठेकेदार के ज़रिए दी जाती है, इसलिए यहाँ रोज़ की मज़दूरी नहीं। बस लिखें कौन आया और क्या काम हुआ।',
-  workersWeek:'इस हफ़्ते कारीगर-दिन',materialByUs:'हमने खरीदा सामान',labourPlusMaterial:'मज़दूरी + सामान: {a} ({p} प्रति वर्ग फ़ुट)'}
+  workersWeek:'इस हफ़्ते कारीगर-दिन',
+  inviteTitle:'जुड़ने का लिंक',inviteHint:'जो भी यह लिंक खोलकर साइन इन करेगा, वह आपके प्रोजेक्ट से जुड़ जाएगा। सिर्फ़ परिवार और भरोसेमंद लोगों को भेजें। लिंक 7 दिन बाद बंद हो जाता है।',
+  inviteRole:'इससे जुड़ने वाले',createInvite:'जुड़ने का लिंक बनाएँ',copyLink:'लिंक कॉपी करें',linkCopied:'लिंक कॉपी हो गया',shareLink:'भेजें',whatsapp:'WhatsApp',
+  turnOff:'बंद करें',turnOffSure:'बंद करने के लिए फिर दबाएँ',expiresOn:'{d} तक चलेगा',joinedN:'{n} जुड़े',orByEmail:'या ईमेल से किसी को जोड़ें',
+  inviteMsg:'हमारे घर के ऐप से जुड़ें। लिंक दबाएँ और अपने ईमेल से साइन इन करें:\nJoin our home build app. Tap the link and sign in with your email:\n{u}',
+  invitedBanner:'आपको इस परिवार के घर प्रोजेक्ट से जुड़ने का न्योता मिला है। जुड़ने के लिए साइन इन करें।',
+  inviteBadTitle:'यह जुड़ने का लिंक अब नहीं चलता',inviteBadBody:'इसकी मियाद खत्म हो गई या इसे बंद कर दिया गया। मालिक से नया लिंक माँगें। आप {e} से साइन इन हैं।',
+  joinedToast:'स्वागत है! आप प्रोजेक्ट से जुड़ गए।',linkOff:'लिंक बंद कर दिया',materialByUs:'हमने खरीदा सामान',labourPlusMaterial:'मज़दूरी + सामान: {a} ({p} प्रति वर्ग फ़ुट)'}
 };
 const CATS = {
   labour:['Labour','मज़दूरी'], cement_steel:['Cement & Steel','सीमेंट और सरिया'], bricks_sand:['Bricks, Sand & Stone','ईंट, रेत और गिट्टी'],
@@ -252,7 +266,7 @@ const blobUrl = id => Backend.fileUrl(id);
 const isImage = type => /^image\//.test(type || '');
 
 /* ---------- state ---------- */
-const S = { state:'loading', auth:{step:'email', email:'', busy:false, err:''}, email:'', role:null, members:[], membersLoaded:false, settings:{}, stages:[], expenses:[], tasks:[], people:[], milestones:[], diary:[], docs:[], decisions:[],
+const S = { state:'loading', auth:{step:'email', email:'', busy:false, err:''}, email:'', role:null, members:[], membersLoaded:false, invites:[], invitesLoaded:false, newInvite:'', inviteInvalid:false, settings:{}, stages:[], expenses:[], tasks:[], people:[], milestones:[], diary:[], docs:[], decisions:[],
   loaded:{}, db:null, user:null, assets:null, canWrite:null, myId:null, names:{}, asked:new Set(),
   personId:null, decisionId:null, keepDetail:false, f:{ stage:'', cat:'', q:'', task:'open', docQ:'' } };
 const COLS = ['stages','expenses','tasks','people','milestones','diary','docs','decisions'];
@@ -339,7 +353,7 @@ function render(){
   else if (S.state==='loading') html = `<div class="empty"><p>${esc(t('loading'))}</p></div>`;
   else if (S.state==='setup') html = `<section class="card authcard"><h2>${esc(t('setupTitle'))}</h2><p class="muted" style="margin:0">${esc(t('setupBody'))}</p></section>`;
   else if (S.state==='signin') html = vSignIn();
-  else if (S.state==='noaccess') html = `<section class="card authcard"><h2>${esc(t('noAccessTitle'))}</h2><p style="margin:0">${esc(t('noAccessBody',{e:S.email}))}</p><button class="btn" data-act="sign-out">${esc(t('signOut'))}</button></section>`;
+  else if (S.state==='noaccess') html = `<section class="card authcard"><h2>${esc(t(S.inviteInvalid?'inviteBadTitle':'noAccessTitle'))}</h2><p style="margin:0">${esc(t(S.inviteInvalid?'inviteBadBody':'noAccessBody',{e:S.email}))}</p><button class="btn" data-act="sign-out">${esc(t('signOut'))}</button></section>`;
   else if (S.state==='timeout') html = `<div class="notice">${esc(t('timeout'))}</div>`;
   else {
     const v = view();
@@ -596,7 +610,8 @@ function vSignIn(){
         ${a.err?`<div class="err">${esc(a.err)}</div>`:''}
         <button class="btn" type="button" data-act="auth-resend" ${a.busy?'disabled':''}>${esc(a.busy?t('sending'):t('sendAgain'))}</button>
         <button class="btn ghost" type="button" data-act="auth-back">${esc(t('otherEmail'))}</button>`;
-  return `<section class="card authcard"><h2>${esc(t('signInTitle'))}</h2><p class="muted" style="margin:0">${esc(t('signInHint'))}</p>${body}</section>`;
+  const banner = Backend.joinPending ? `<div class="notice" style="background:var(--good-bg)">${esc(t('invitedBanner'))}</div>` : '';
+  return `<section class="card authcard">${banner}<h2>${esc(t('signInTitle'))}</h2><p class="muted" style="margin:0">${esc(t(Backend.joinPending?'signInHintInvite':'signInHint'))}</p>${body}</section>`;
 }
 const GOOGLE_MARK = '<svg viewBox="0 0 24 24" aria-hidden="true" style="width:20px;height:20px"><path fill="#4285F4" d="M23.5 12.3c0-.8-.1-1.6-.2-2.3H12v4.5h6.5a5.6 5.6 0 0 1-2.4 3.6v3h3.9c2.3-2.1 3.5-5.2 3.5-8.8z"/><path fill="#34A853" d="M12 24c3.2 0 6-1.1 7.9-2.9l-3.9-3c-1.1.7-2.4 1.2-4 1.2-3.1 0-5.7-2.1-6.6-4.9h-4v3.1A12 12 0 0 0 12 24z"/><path fill="#FBBC05" d="M5.4 14.4a7.2 7.2 0 0 1 0-4.7V6.6h-4a12 12 0 0 0 0 10.8z"/><path fill="#EA4335" d="M12 4.8c1.7 0 3.3.6 4.5 1.8l3.4-3.4A12 12 0 0 0 1.4 6.6l4 3.1C6.3 6.9 8.9 4.8 12 4.8z"/></svg>';
 async function sendSignInLink(){
@@ -626,7 +641,8 @@ function vAccess(){
   ${backBtn('go-more')}
   ${head(t('access'))}
   <div class="notice">${esc(t('accessHint'))}</div>
-  ${owner ? `<section class="card"><h2 style="margin-bottom:12px">${esc(t('addMember'))}</h2>
+  ${owner ? vInviteCard() : ''}
+  ${owner ? `<section class="card"><h2 style="margin-bottom:12px">${esc(t('orByEmail'))}</h2>
     <form class="f" id="memberForm" novalidate>
       <div class="two"><div class="field"><label for="mEmail">${esc(t('memberEmail'))}</label><input id="mEmail" type="email" inputmode="email" placeholder="${esc(t('emailPh'))}"></div>
       <div class="field"><label for="mName">${esc(t('memberName'))}</label><input id="mName" type="text"></div></div>
@@ -648,6 +664,41 @@ function vAccess(){
           <button class="btn sm danger" data-act="remove-member" data-email="${esc(m.email)}">${esc(t('remove'))}</button></div>`
         : `<span class="pill info">${esc(ROLE_LABEL(m.role))}</span>`}
     </div>`).join('')}</div></section></div>`;
+}
+async function loadInvites(){
+  try { S.invites = await Backend.invites.list(); S.invitesLoaded = true; } catch {}
+  scheduleRender();
+}
+const inviteMessage = url => t('inviteMsg',{u:url});
+function vInviteCard(){
+  if (!S.invitesLoaded) loadInvites();
+  const now = new Date();
+  const active = S.invites.filter(i => !i.revoked && new Date(i.expires_at) > now);
+  return `<section class="card" style="display:flex;flex-direction:column;gap:12px">
+    <h2>${esc(t('inviteTitle'))}</h2>
+    <p class="small muted" style="margin:0">${esc(t('inviteHint'))}</p>
+    <form class="f" id="inviteForm" novalidate>
+      <div class="field"><div class="flabel">${esc(t('inviteRole'))}</div><div class="seg" role="radiogroup">
+        <label><input type="radio" name="invRole" value="editor" checked>${esc(t('roleEditor'))}</label>
+        <label><input type="radio" name="invRole" value="viewer">${esc(t('roleViewer'))}</label></div></div>
+      <button class="btn primary" type="submit" style="min-height:52px">${ic('plus',2.4)}${esc(t('createInvite'))}</button>
+    </form>
+    ${active.map(i => { const url = Backend.invites.url(i.token); const fresh = i.token === S.newInvite;
+      return `<div class="invite ${fresh?'fresh':''}">
+        <div class="chips"><span class="pill info">${esc(ROLE_LABEL(i.role))}</span><span class="pill todo">${esc(t('expiresOn',{d:fmtDate(i.expires_at.slice(0,10))}))}</span>${i.uses?`<span class="pill done">${esc(t('joinedN',{n:i.uses}))}</span>`:''}</div>
+        <div class="phone"><span class="small" style="font-weight:500">${esc(url)}</span></div>
+        <div class="split">
+          <button class="btn sm primary" data-act="copy-invite" data-url="${esc(url)}">${ic('copy')}${esc(t('copyLink'))}</button>
+          <a class="btn sm" href="https://wa.me/?text=${encodeURIComponent(inviteMessage(url))}" target="_blank" rel="noopener">${esc(t('whatsapp'))}</a>
+          ${navigator.share ? `<button class="btn sm" data-act="share-invite" data-url="${esc(url)}">${esc(t('shareLink'))}</button>` : ''}
+          <button class="btn sm danger" data-act="turn-off-invite" data-token="${esc(i.token)}">${esc(t('turnOff'))}</button>
+        </div></div>`; }).join('')}
+  </section>`;
+}
+async function handleInviteSubmit(){
+  const role = document.querySelector('input[name=invRole]:checked')?.value || 'editor';
+  try { S.newInvite = await Backend.invites.create(role); await loadInvites(); }
+  catch { toast(t('saveFail')); }
 }
 async function handleMemberSubmit(){
   const email = ($('#mEmail')?.value || '').trim().toLowerCase(); const name = ($('#mName')?.value || '').trim();
@@ -1150,6 +1201,17 @@ document.addEventListener('click', async ev => {
     case 'google': Backend.auth.google().catch(()=>{ S.auth.err = t('sendFail'); render(); }); break;
     case 'auth-back': S.auth = {step:'email', email:S.auth.email, busy:false, err:''}; render(); break;
     case 'auth-resend': if (!S.auth.busy) sendSignInLink(); break;
+    case 'copy-invite': {
+      const url = el.dataset.url;
+      try { await navigator.clipboard.writeText(url); toast(t('linkCopied')); }
+      catch { const sp = el.closest('.invite')?.querySelector('.phone span'); if (sp){ const rg = document.createRange(); rg.selectNodeContents(sp); const sel = getSelection(); sel.removeAllRanges(); sel.addRange(rg); } }
+      break; }
+    case 'share-invite': navigator.share?.({ title: t('inviteTitle'), text: inviteMessage(el.dataset.url) }).catch(()=>{}); break;
+    case 'turn-off-invite': {
+      if (armedDelete !== el){ armedDelete = el; el.classList.add('armed'); el.textContent = t('turnOffSure'); setTimeout(()=>{ if (armedDelete===el){ armedDelete=null; el.classList.remove('armed'); el.textContent=t('turnOff'); } }, 4000); break; }
+      armedDelete = null; el.disabled = true;
+      try { await Backend.invites.turnOff(el.dataset.token); toast(t('linkOff')); await loadInvites(); } catch { toast(t('saveFail')); el.disabled = false; }
+      break; }
     case 'remove-member': {
       if (armedDelete !== el){ armedDelete = el; el.classList.add('armed'); el.textContent = t('removeSure'); setTimeout(()=>{ if (armedDelete===el){ armedDelete=null; el.classList.remove('armed'); el.textContent=t('remove'); } }, 4000); break; }
       armedDelete = null; el.disabled = true;
@@ -1267,6 +1329,7 @@ document.addEventListener('change', async ev => {
 document.addEventListener('submit', ev => {
   if (ev.target.id==='authForm'){ ev.preventDefault(); handleAuthSubmit(); }
   if (ev.target.id==='memberForm'){ ev.preventDefault(); handleMemberSubmit(); }
+  if (ev.target.id==='inviteForm'){ ev.preventDefault(); handleInviteSubmit(); }
 });
 document.addEventListener('keydown', ev => { if (ev.key==='Escape' && sheet) closeForm(); });
 window.addEventListener('hashchange', () => {
@@ -1296,7 +1359,8 @@ async function boot(){
   Backend.onFileUrls(scheduleRender);
   await Backend.start(async info => {
     S.email = info.email || '';
-    if (info.state !== 'ready'){ if (info.linkError) S.auth.err = t('linkExpired'); S.state = info.state; render(); return; }
+    if (info.state !== 'ready'){ if (info.linkError) S.auth.err = t('linkExpired'); S.inviteInvalid = !!info.inviteInvalid; S.state = info.state; render(); return; }
+    if (info.joined) setTimeout(()=>toast(t('joinedToast')), 600);
     S.role = info.role; S.canWrite = info.role==='owner' || info.role==='editor';
     S.db = Backend.db; S.user = Backend.user; S.assets = S.canWrite ? Backend.assets : null;
     try { S.myId = await Backend.user.id(); } catch {}

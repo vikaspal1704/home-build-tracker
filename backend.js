@@ -15,6 +15,7 @@
   function atobSafe(s) { try { return atob((s || '').replace(/-/g, '+').replace(/_/g, '/')); } catch { return ''; } }
   const SIGNED_URL_SECONDS = 60 * 60 * 6;
   const RELOAD_DEBOUNCE_MS = 150;
+  const JOIN_KEY = 'homebuild.join';
   const PIXEL = 'data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==';
 
   const isSecretKey = /^sb_secret_/.test(CFG.SUPABASE_ANON_KEY || '') || /service_role/.test(atobSafe((CFG.SUPABASE_ANON_KEY || '').split('.')[1]));
@@ -23,6 +24,27 @@
   const sb = configured && window.supabase
     ? window.supabase.createClient(CFG.SUPABASE_URL, CFG.SUPABASE_ANON_KEY, { auth: { persistSession: true, autoRefreshToken: true } })
     : null;
+
+  /* ---------- invite link: ?join=<token> ---------- */
+  // Kept in this browser until sign-in finishes, and carried through the
+  // sign-in email / Google round trip in the return address.
+  let joinToken = '';
+  (function readJoinToken() {
+    const params = new URLSearchParams(location.search);
+    const fromUrl = (params.get('join') || '').replace(/[^a-f0-9]/gi, '');
+    if (fromUrl) {
+      joinToken = fromUrl;
+      try { localStorage.setItem(JOIN_KEY, fromUrl); } catch {}
+      params.delete('join');
+      const rest = params.toString();
+      history.replaceState(null, '', location.pathname + (rest ? '?' + rest : '') + location.hash);
+    } else {
+      try { joinToken = localStorage.getItem(JOIN_KEY) || ''; } catch {}
+    }
+  })();
+  const forgetJoinToken = () => { joinToken = ''; try { localStorage.removeItem(JOIN_KEY); } catch {} };
+  const returnAddress = () => location.origin + location.pathname + (joinToken ? '?join=' + encodeURIComponent(joinToken) : '');
+  const inviteUrl = token => location.origin + location.pathname + '?join=' + encodeURIComponent(token);
 
   /* ---------- live collections ---------- */
   const listeners = new Map();   // collection -> Set<{next, err}>
@@ -156,18 +178,32 @@
     async remove(email) { const { error } = await sb.from('members').delete().eq('email', email); fail(error); }
   };
 
+  /* ---------- invite links (owner) ---------- */
+  const invites = {
+    async list() {
+      const { data, error } = await sb.from('invites').select('token,role,expires_at,revoked,uses,created_at').order('created_at', { ascending: false });
+      fail(error); return data || [];
+    },
+    async create(role) {
+      const { data, error } = await sb.rpc('create_invite', { p_role: role, p_days: 7 });
+      fail(error); return data;
+    },
+    async turnOff(token) { const { error } = await sb.from('invites').update({ revoked: true }).eq('token', token); fail(error); },
+    url: inviteUrl
+  };
+
   /* ---------- sign in ---------- */
   const auth = {
     // Supabase's standard (free) email contains a sign-in link back to this page.
     async sendLink(email) {
       const { error } = await sb.auth.signInWithOtp({
         email: email.trim().toLowerCase(),
-        options: { shouldCreateUser: true, emailRedirectTo: location.origin + location.pathname }
+        options: { shouldCreateUser: true, emailRedirectTo: returnAddress() }
       });
       fail(error);
     },
     async google() {
-      const { error } = await sb.auth.signInWithOAuth({ provider: 'google', options: { redirectTo: location.origin + location.pathname } });
+      const { error } = await sb.auth.signInWithOAuth({ provider: 'google', options: { redirectTo: returnAddress() } });
       fail(error);
     },
     async signOut() { await sb.auth.signOut(); location.hash = ''; location.reload(); }
@@ -194,10 +230,17 @@
       const displayName = s.user.user_metadata?.full_name || s.user.user_metadata?.name || '';
       const { data, error } = await sb.rpc('claim_membership', { display_name: displayName });
       role = error ? null : data;
+      let joined = false, inviteInvalid = false;
+      if (!role && joinToken) {
+        const res = await sb.rpc('accept_invite', { p_token: joinToken, display_name: displayName });
+        role = res.error ? null : res.data;
+        joined = !!role; inviteInvalid = !role;
+      }
+      if (joinToken && (role || inviteInvalid)) forgetJoinToken();
       const next = role ? 'ready' : 'noaccess';
       if (reported === next) return;
       reported = next;
-      onState({ state: next, email, role });
+      onState({ state: next, email, role, joined, inviteInvalid });
     };
     const { data } = await sb.auth.getSession();
     await resolve(data.session);
@@ -205,7 +248,8 @@
   }
 
   window.Backend = {
-    configured, start, db, user, assets, members, auth,
+    configured, start, db, user, assets, members, invites, auth,
+    get joinPending() { return !!joinToken; },
     fileUrl, onFileUrls(fn) { onUrls = fn; },
     googleEnabled: !!CFG.GOOGLE_SIGN_IN
   };

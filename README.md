@@ -10,7 +10,8 @@ It works on phones and computers, in English and हिंदी.
 - **Tasks and stages:** what needs doing next, and how far the build has got.
 - **Documents:** approvals, agreements, drawings, bills and warranties, with expiry reminders.
 - **Decisions:** tiles, colours and fittings, with photos, family votes and the final choice.
-- **Family & access:** only people you add can open it. Each person is either "can add and edit" or "can only view".
+- **Invite link:** send one link on WhatsApp, and family members join as soon as they sign in.
+- **Family & access:** only people you invite or add can open it. Each person is either "can add and edit" or "can only view".
 
 It is a plain website (HTML, CSS and JavaScript, no build step). Data, sign-in and photos
 live in a free [Supabase](https://supabase.com) project. Hosting is free on GitHub Pages,
@@ -69,17 +70,22 @@ publish the repo root.
 
 In Supabase, go to **Authentication → URL Configuration**:
 - **Site URL:** your site address, for example `https://<your-username>.github.io/home-build-tracker/`
-- **Redirect URLs:** add the same address.
+- **Redirect URLs:** add the same address with `**` on the end, for example
+  `https://<your-username>.github.io/home-build-tracker/**`. The `**` lets invite links keep working through sign-in.
 
 Without this, the link in the sign-in email opens the wrong page.
 
 ### 6. Invite the family
 
 1. Open your site, choose a language, and sign in with the email you put in `schema.sql`.
-2. Go to **More → Family & access** and add each person's email:
+2. Go to **More → Family & access → Invite link**. Choose what joiners can do:
    - **Can add and edit** for family members who will enter expenses and diary.
    - **Can only view** for anyone who should only look, such as a contractor.
-3. Send them the link and tell them to sign in with that same email.
+3. Tap **Create invite link**, then **WhatsApp** (or **Copy link**) and send it.
+4. They open the link, enter their email, tap the sign-in link in that email, and they're in.
+
+Each link works for 7 days. **Turn off** stops it at once, and the list shows who joined,
+so you can remove anyone. To add one specific person instead, use **Or add someone by email**.
 
 On a phone, use the browser menu → **Add to Home screen**, and it opens like an app.
 
