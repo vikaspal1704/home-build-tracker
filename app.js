@@ -87,20 +87,25 @@ const T = {
   // more
   language:'Language',moreDocs:'{n} papers',moreDec:'{n} to decide',morePeople:'{n} people',moreStages:'{a} of {b} done',
   // sign in + access
-  signInTitle:'Sign in to open your home project',signInHint:'Use the email the owner added for you. No password needed.',signInHintInvite:'Use the email you check most often. No password needed.',
-  emailLabel:'Your email',emailPh:'name@gmail.com',sendLink:'Email me a sign-in link',linkSentTitle:'Check your email',
-  linkSent:'We sent a sign-in link to {e}. Open that email on this phone and tap the link. Look in the spam folder too.',
-  otherEmail:'Use a different email',sendAgain:'Send the link again',withGoogle:'Continue with Google',or:'or sign in with email',
-  badEmail:'Please enter a valid email.',linkExpired:'That sign-in link has expired or was already used. Send a new one below.',
-  sendFail:'Could not send the email. Wait a minute and try again.',tooMany:'Too many sign-in emails right now. Try again in an hour, or use Google sign-in.',
-  sending:'Sending…',
-  noAccessTitle:'This email is not on the family list',noAccessBody:'You are signed in as {e}. Ask the owner to add this email under More → Family & access, then open this page again.',
-  signOut:'Sign out',setupTitle:'Almost ready',setupBody:'The owner still needs to connect the database. Follow the steps in README.md: add the Supabase address and key to config.js.',
-  access:'Family & access',accessHint:'Only people on this list can open the app. The easiest way to add family is an invite link: send it on WhatsApp and they join when they sign in.',
-  addMember:'Add person',memberEmail:'Email',memberName:'Name',roleLabel:'What can they do?',roleOwner:'Owner',roleEditor:'Can add and edit',roleViewer:'Can only view',
-  remove:'Remove',removeSure:'Tap again to remove',joined:'Has signed in',notJoined:'Not signed in yet',moreAccess:'{n} people can open the app',
-  added:'Added',removed:'Removed',addFail:'Could not add. Is this email already on the list?',
-  // per sq ft contracts
+  setupTitle:'Almost ready',setupBody:'The owner still needs to connect the database. Follow the steps in README.md: add the Supabase address and key to config.js.',
+  access:'Family & access',accessHint:'Only people who joined with a code can open the app. Send the family code to whoever should be in.',roleLabel:'What can they do?',
+  startTitle:'Start your home project',startHint:'You are the first one here, so you will be the owner. Next you get a family code to share on WhatsApp.',
+  yourName:'Your name',yourNamePh:'e.g. Vikas',startBtn:'Start my project',starting:'Starting…',
+  joinTitle:'Join the family’s home project',joinHint:'Type your name and the family code. If you opened the link the owner sent, the code is already filled in.',
+  familyCode:'Family code',joinBtn:'Join',joining:'Joining…',needYourName:'Please write your name, so everyone knows who added what.',
+  needCode:'Please type the family code. It looks like K7MP-Q4XT.',wrongCode:'That code did not work. Check it with the owner. Codes look like K7MP-Q4XT.',
+  tooManyTries:'Too many wrong codes. Wait an hour, then try again.',anonOff:'Joining is switched off in the database. The owner must turn on “Allow anonymous sign-ins” in Supabase (see README).',
+  alreadyStarted:'This project has already been started. Ask the owner for the family code.',joinFail:'Could not join. Check your internet and try again.',
+  codesTitle:'Codes to join',codesHint:'Anyone with a code can join, so send it only to family and people you trust. If a code reaches the wrong person, change it: the old one stops working at once.',
+  codeEditor:'Family code',codeEditorSub:'Can add and edit everything.',codeViewer:'View-only code',codeViewerSub:'Can see everything but change nothing. For example, a contractor.',
+  codeOwner:'Owner code',codeOwnerSub:'Keep this private. Use it to get owner access back on a new phone.',showCode:'Show',hideCode:'Hide',
+  copyLink:'Copy link',linkCopied:'Link copied',shareLink:'Share',whatsapp:'WhatsApp',changeCode:'Change code',changeSure:'Tap again: old code stops working',
+  codeChanged:'New code made. The old one no longer works.',usedN:'Joined with it: {n}',peopleIn:'People in the project',joinedOn:'Joined {d}',
+  editName:'Change my name',leavePhone:'Leave on this phone',leaveSub:'You will need the family code to come back.',leaveSure:'Tap again to leave',
+  remove:'Remove',removeSure:'Tap again to remove',removed:'Removed',welcome:'Welcome! You are in the project.',welcomeOwner:'Your project is ready. Share the family code below.',
+  inviteMsg:'Join our home build app. Open the link, type your name and tap Join.\nहमारे घर के ऐप से जुड़ें। लिंक खोलें, अपना नाम लिखें और “जुड़ें” दबाएँ।\nCode / कोड: {c}\n{u}',roleOwner:'Owner',roleEditor:'Can add and edit',roleViewer:'Can only view',
+  remove:'Remove',removeSure:'Tap again to remove',moreAccess:'{n} people can open the app',
+  removed:'Removed',// per sq ft contracts
   area:'Built-up area (sq ft)',areaHint:'All floors together, e.g. 3 floors × 1,200 = 3,600',labourPay:'How is labour paid?',
   lpContract:'Through contractor',lpDaily:'Daily wages by us',costPerSqft:'{a} per sq ft so far',areaShort:'{n} sq ft',
   contractType:'Type of deal',ctNone:'No fixed deal',ctTurnkey:'Per sq ft, with material',ctLabour:'Per sq ft, labour only',ctFixed:'Fixed total',
@@ -109,13 +114,7 @@ const T = {
   labourHint:'You buy the material. The contractor pays his workers, so no daily wages from you.',
   contractLabour:'Labour is paid through the contractor, so there are no daily wages here. Just note who came and what got done.',
   workersWeek:'Worker-days this week',
-  inviteTitle:'Invite link',inviteHint:'Anyone who opens this link and signs in joins your project. Share it only with family and people you trust. A link stops working after 7 days.',
-  inviteRole:'People who join with it can',createInvite:'Create invite link',copyLink:'Copy link',linkCopied:'Link copied',shareLink:'Share',whatsapp:'WhatsApp',
-  turnOff:'Turn off',turnOffSure:'Tap again to turn off',expiresOn:'Works until {d}',joinedN:'{n} joined',orByEmail:'Or add someone by email',
-  inviteMsg:'Join our home build app. Tap the link and sign in with your email:\nहमारे घर के ऐप से जुड़ें। लिंक दबाएँ और अपने ईमेल से साइन इन करें:\n{u}',
-  invitedBanner:'You have been invited to join this family’s home project. Sign in to join.',
-  inviteBadTitle:'This invite link no longer works',inviteBadBody:'It has expired or was turned off. Ask the owner to send you a new link. You are signed in as {e}.',
-  joinedToast:'Welcome! You have joined the project.',linkOff:'Link turned off',materialByUs:'Material bought by us',labourPlusMaterial:'Labour + material: {a} ({p} per sq ft)'},
+  materialByUs:'Material bought by us',labourPlusMaterial:'Labour + material: {a} ({p} per sq ft)'},
  hi:{home:'होम',money:'खर्चा',tasks:'काम',stages:'चरण',people:'लोग',diary:'साइट डायरी',more:'और',docs:'कागज़ात',decisions:'फ़ैसले',
   defaultName:'हमारा नया घर',addExpense:'खर्चा जोड़ें',addTask:'काम जोड़ें',addPerson:'व्यक्ति जोड़ें',addStage:'चरण जोड़ें',
   spent:'अब तक खर्चा',budget:'बजट',left:'बचा हुआ',over:'बजट से ज़्यादा',noBudget:'अभी बजट तय नहीं है',setBudget:'बजट तय करें',editProject:'प्रोजेक्ट जानकारी',
@@ -172,20 +171,25 @@ const T = {
   noDecisions:'परिवार को जो चुनना है वो लिखें: टाइल, पेंट का रंग, किचन का डिज़ाइन। फ़ोटो के साथ विकल्प जोड़ें और वोट करें।',
   noOptions:'अभी कोई विकल्प नहीं। तुलना के लिए 2-3 जोड़ें।',optionsCount:'{n} विकल्प',
   language:'भाषा',moreDocs:'{n} कागज़',moreDec:'{n} तय करने बाकी',morePeople:'{n} लोग',moreStages:'{b} में से {a} पूरे',
-  signInTitle:'अपना घर प्रोजेक्ट खोलने के लिए साइन इन करें',signInHint:'वही ईमेल डालें जो मालिक ने आपके लिए जोड़ा है। पासवर्ड नहीं चाहिए।',signInHintInvite:'वह ईमेल डालें जो आप सबसे ज़्यादा देखते हैं। पासवर्ड नहीं चाहिए।',
-  emailLabel:'आपका ईमेल',emailPh:'name@gmail.com',sendLink:'साइन इन लिंक ईमेल करें',linkSentTitle:'अपना ईमेल देखें',
-  linkSent:'{e} पर साइन इन लिंक भेजा है। वह ईमेल इसी फ़ोन पर खोलें और लिंक दबाएँ। स्पैम फ़ोल्डर भी देखें।',
-  otherEmail:'दूसरा ईमेल डालें',sendAgain:'लिंक फिर भेजें',withGoogle:'Google से जारी रखें',or:'या ईमेल से साइन इन करें',
-  badEmail:'कृपया सही ईमेल डालें।',linkExpired:'यह साइन इन लिंक पुराना हो गया या पहले इस्तेमाल हो चुका है। नीचे से नया मँगाएँ।',
-  sendFail:'ईमेल नहीं भेजा जा सका। एक मिनट रुककर फिर कोशिश करें।',tooMany:'अभी बहुत ज़्यादा साइन इन ईमेल भेजे गए। एक घंटे बाद कोशिश करें, या Google से साइन इन करें।',
-  sending:'भेज रहे हैं…',
-  noAccessTitle:'यह ईमेल परिवार की सूची में नहीं है',noAccessBody:'आप {e} से साइन इन हैं। मालिक से कहें कि इसे और → परिवार और अनुमति में जोड़ें, फिर यह पेज दोबारा खोलें।',
-  signOut:'साइन आउट',setupTitle:'लगभग तैयार',setupBody:'मालिक को अभी डेटाबेस जोड़ना है। README.md के कदम देखें: config.js में Supabase का पता और key डालें।',
-  access:'परिवार और अनुमति',accessHint:'सिर्फ़ इस सूची के लोग ऐप खोल सकते हैं। परिवार को जोड़ने का सबसे आसान तरीका जुड़ने का लिंक है: WhatsApp पर भेजें, साइन इन करते ही वे जुड़ जाएँगे।',
-  addMember:'व्यक्ति जोड़ें',memberEmail:'ईमेल',memberName:'नाम',roleLabel:'वे क्या कर सकते हैं?',roleOwner:'मालिक',roleEditor:'जोड़ और बदल सकते हैं',roleViewer:'सिर्फ़ देख सकते हैं',
-  remove:'हटाएँ',removeSure:'हटाने के लिए फिर दबाएँ',joined:'साइन इन कर चुके',notJoined:'अभी साइन इन नहीं किया',moreAccess:'{n} लोग ऐप खोल सकते हैं',
-  added:'जोड़ दिया',removed:'हटा दिया',addFail:'नहीं जुड़ा। क्या यह ईमेल पहले से सूची में है?',
-  area:'कुल निर्माण क्षेत्र (वर्ग फ़ुट)',areaHint:'सभी मंज़िलें मिलाकर, जैसे 3 मंज़िल × 1,200 = 3,600',labourPay:'मज़दूरी कैसे दी जाती है?',
+  setupTitle:'लगभग तैयार',setupBody:'मालिक को अभी डेटाबेस जोड़ना है। README.md के कदम देखें: config.js में Supabase का पता और key डालें।',
+  access:'परिवार और अनुमति',accessHint:'सिर्फ़ कोड से जुड़े लोग ऐप खोल सकते हैं। जिसे जोड़ना है उसे परिवार का कोड भेजें।',roleLabel:'वे क्या कर सकते हैं?',
+  startTitle:'अपना घर प्रोजेक्ट शुरू करें',startHint:'आप यहाँ सबसे पहले हैं, इसलिए आप मालिक होंगे। इसके बाद आपको WhatsApp पर भेजने के लिए परिवार का कोड मिलेगा।',
+  yourName:'आपका नाम',yourNamePh:'जैसे विकास',startBtn:'मेरा प्रोजेक्ट शुरू करें',starting:'शुरू हो रहा है…',
+  joinTitle:'परिवार के घर प्रोजेक्ट से जुड़ें',joinHint:'अपना नाम और परिवार का कोड लिखें। अगर आपने मालिक का भेजा लिंक खोला है, तो कोड पहले से भरा होगा।',
+  familyCode:'परिवार का कोड',joinBtn:'जुड़ें',joining:'जुड़ रहे हैं…',needYourName:'कृपया अपना नाम लिखें, ताकि सबको पता रहे किसने क्या जोड़ा।',
+  needCode:'कृपया परिवार का कोड लिखें। यह K7MP-Q4XT जैसा दिखता है।',wrongCode:'यह कोड नहीं चला। मालिक से जाँच लें। कोड K7MP-Q4XT जैसे होते हैं।',
+  tooManyTries:'बहुत बार गलत कोड डाला गया। एक घंटा रुककर फिर कोशिश करें।',anonOff:'डेटाबेस में जुड़ना बंद है। मालिक को Supabase में “Allow anonymous sign-ins” चालू करना होगा (README देखें)।',
+  alreadyStarted:'यह प्रोजेक्ट पहले ही शुरू हो चुका है। मालिक से परिवार का कोड माँगें।',joinFail:'जुड़ नहीं पाए। इंटरनेट देखें और फिर कोशिश करें।',
+  codesTitle:'जुड़ने के कोड',codesHint:'कोड वाला कोई भी जुड़ सकता है, इसलिए सिर्फ़ परिवार और भरोसेमंद लोगों को भेजें। अगर कोड गलत व्यक्ति तक पहुँच जाए, तो उसे बदल दें: पुराना कोड तुरंत बंद हो जाएगा।',
+  codeEditor:'परिवार का कोड',codeEditorSub:'सब कुछ जोड़ और बदल सकते हैं।',codeViewer:'सिर्फ़ देखने का कोड',codeViewerSub:'सब देख सकते हैं, कुछ बदल नहीं सकते। जैसे ठेकेदार।',
+  codeOwner:'मालिक का कोड',codeOwnerSub:'इसे किसी को न दें। नए फ़ोन पर मालिक की पहुँच वापस पाने के लिए इसका उपयोग करें।',showCode:'दिखाएँ',hideCode:'छिपाएँ',
+  copyLink:'लिंक कॉपी करें',linkCopied:'लिंक कॉपी हो गया',shareLink:'भेजें',whatsapp:'WhatsApp',changeCode:'कोड बदलें',changeSure:'फिर दबाएँ: पुराना कोड बंद हो जाएगा',
+  codeChanged:'नया कोड बन गया। पुराना अब नहीं चलेगा।',usedN:'इससे जुड़े: {n}',peopleIn:'प्रोजेक्ट में लोग',joinedOn:'{d} को जुड़े',
+  editName:'मेरा नाम बदलें',leavePhone:'इस फ़ोन से बाहर निकलें',leaveSub:'वापस आने के लिए परिवार का कोड चाहिए होगा।',leaveSure:'बाहर निकलने के लिए फिर दबाएँ',
+  remove:'हटाएँ',removeSure:'हटाने के लिए फिर दबाएँ',removed:'हटा दिया',welcome:'स्वागत है! आप प्रोजेक्ट में जुड़ गए।',welcomeOwner:'आपका प्रोजेक्ट तैयार है। नीचे दिया परिवार का कोड भेजें।',
+  inviteMsg:'हमारे घर के ऐप से जुड़ें। लिंक खोलें, अपना नाम लिखें और “जुड़ें” दबाएँ।\nJoin our home build app. Open the link, type your name and tap Join.\nकोड / Code: {c}\n{u}',roleOwner:'मालिक',roleEditor:'जोड़ और बदल सकते हैं',roleViewer:'सिर्फ़ देख सकते हैं',
+  remove:'हटाएँ',removeSure:'हटाने के लिए फिर दबाएँ',moreAccess:'{n} लोग ऐप खोल सकते हैं',
+  removed:'हटा दिया',area:'कुल निर्माण क्षेत्र (वर्ग फ़ुट)',areaHint:'सभी मंज़िलें मिलाकर, जैसे 3 मंज़िल × 1,200 = 3,600',labourPay:'मज़दूरी कैसे दी जाती है?',
   lpContract:'ठेकेदार के ज़रिए',lpDaily:'हम रोज़ की मज़दूरी देते हैं',costPerSqft:'अब तक {a} प्रति वर्ग फ़ुट',areaShort:'{n} वर्ग फ़ुट',
   contractType:'सौदे का प्रकार',ctNone:'कोई तय सौदा नहीं',ctTurnkey:'प्रति वर्ग फ़ुट, सामान सहित',ctLabour:'प्रति वर्ग फ़ुट, सिर्फ़ मज़दूरी',ctFixed:'तय कुल रकम',
   ratePerSqft:'प्रति वर्ग फ़ुट दर',sqft:'क्षेत्र (वर्ग फ़ुट)',sqftTotal:'कुल सौदा: {a}',rateLine:'{r} / वर्ग फ़ुट × {n} वर्ग फ़ुट',
@@ -193,13 +197,7 @@ const T = {
   labourHint:'सामान आप खरीदेंगे। ठेकेदार अपने मज़दूरों को पैसे देगा, आपको रोज़ की मज़दूरी नहीं देनी।',
   contractLabour:'मज़दूरी ठेकेदार के ज़रिए दी जाती है, इसलिए यहाँ रोज़ की मज़दूरी नहीं। बस लिखें कौन आया और क्या काम हुआ।',
   workersWeek:'इस हफ़्ते कारीगर-दिन',
-  inviteTitle:'जुड़ने का लिंक',inviteHint:'जो भी यह लिंक खोलकर साइन इन करेगा, वह आपके प्रोजेक्ट से जुड़ जाएगा। सिर्फ़ परिवार और भरोसेमंद लोगों को भेजें। लिंक 7 दिन बाद बंद हो जाता है।',
-  inviteRole:'इससे जुड़ने वाले',createInvite:'जुड़ने का लिंक बनाएँ',copyLink:'लिंक कॉपी करें',linkCopied:'लिंक कॉपी हो गया',shareLink:'भेजें',whatsapp:'WhatsApp',
-  turnOff:'बंद करें',turnOffSure:'बंद करने के लिए फिर दबाएँ',expiresOn:'{d} तक चलेगा',joinedN:'{n} जुड़े',orByEmail:'या ईमेल से किसी को जोड़ें',
-  inviteMsg:'हमारे घर के ऐप से जुड़ें। लिंक दबाएँ और अपने ईमेल से साइन इन करें:\nJoin our home build app. Tap the link and sign in with your email:\n{u}',
-  invitedBanner:'आपको इस परिवार के घर प्रोजेक्ट से जुड़ने का न्योता मिला है। जुड़ने के लिए साइन इन करें।',
-  inviteBadTitle:'यह जुड़ने का लिंक अब नहीं चलता',inviteBadBody:'इसकी मियाद खत्म हो गई या इसे बंद कर दिया गया। मालिक से नया लिंक माँगें। आप {e} से साइन इन हैं।',
-  joinedToast:'स्वागत है! आप प्रोजेक्ट से जुड़ गए।',linkOff:'लिंक बंद कर दिया',materialByUs:'हमने खरीदा सामान',labourPlusMaterial:'मज़दूरी + सामान: {a} ({p} प्रति वर्ग फ़ुट)'}
+  materialByUs:'हमने खरीदा सामान',labourPlusMaterial:'मज़दूरी + सामान: {a} ({p} प्रति वर्ग फ़ुट)'}
 };
 const CATS = {
   labour:['Labour','मज़दूरी'], cement_steel:['Cement & Steel','सीमेंट और सरिया'], bricks_sand:['Bricks, Sand & Stone','ईंट, रेत और गिट्टी'],
@@ -266,7 +264,7 @@ const blobUrl = id => Backend.fileUrl(id);
 const isImage = type => /^image\//.test(type || '');
 
 /* ---------- state ---------- */
-const S = { state:'loading', auth:{step:'email', email:'', busy:false, err:''}, email:'', role:null, members:[], membersLoaded:false, invites:[], invitesLoaded:false, newInvite:'', inviteInvalid:false, settings:{}, stages:[], expenses:[], tasks:[], people:[], milestones:[], diary:[], docs:[], decisions:[],
+const S = { state:'loading', gate:{code:'', name:'', busy:false, err:''}, role:null, members:[], membersLoaded:false, codes:[], codesLoaded:false, showOwnerCode:false, justStarted:false, settings:{}, stages:[], expenses:[], tasks:[], people:[], milestones:[], diary:[], docs:[], decisions:[],
   loaded:{}, db:null, user:null, assets:null, canWrite:null, myId:null, names:{}, asked:new Set(),
   personId:null, decisionId:null, keepDetail:false, f:{ stage:'', cat:'', q:'', task:'open', docQ:'' } };
 const COLS = ['stages','expenses','tasks','people','milestones','diary','docs','decisions'];
@@ -352,8 +350,7 @@ function render(){
   if (!langChosen) html = vChooser();
   else if (S.state==='loading') html = `<div class="empty"><p>${esc(t('loading'))}</p></div>`;
   else if (S.state==='setup') html = `<section class="card authcard"><h2>${esc(t('setupTitle'))}</h2><p class="muted" style="margin:0">${esc(t('setupBody'))}</p></section>`;
-  else if (S.state==='signin') html = vSignIn();
-  else if (S.state==='noaccess') html = `<section class="card authcard"><h2>${esc(t(S.inviteInvalid?'inviteBadTitle':'noAccessTitle'))}</h2><p style="margin:0">${esc(t(S.inviteInvalid?'inviteBadBody':'noAccessBody',{e:S.email}))}</p><button class="btn" data-act="sign-out">${esc(t('signOut'))}</button></section>`;
+  else if (S.state==='start' || S.state==='join') html = vGate();
   else if (S.state==='timeout') html = `<div class="notice">${esc(t('timeout'))}</div>`;
   else {
     const v = view();
@@ -591,41 +588,45 @@ function vMore(){
     ${tile('decisions','decide',t('decisions'),t('moreDec',{n:openDec}))}
     ${tile('stages','stages',t('stages'),t('moreStages',{a:st.filter(s=>s.status==='done').length,b:st.length}))}
     ${canWrite()?`<button class="tile" data-act="edit-project"><span class="ti">${ic('home')}</span><span><b>${esc(t('editProject'))}</b><small>${esc(t('budget'))} · ${esc(t('moveIn'))}</small></span></button>`:''}
-    ${tile('access','people',t('access'), S.membersLoaded ? t('moreAccess',{n:S.members.length}) : S.email)}
+    ${tile('access','people',t('access'), S.membersLoaded ? t('moreAccess',{n:S.members.length}) : '')}
     <button class="tile" data-act="lang"><span class="ti">${ic('globe')}</span><span><b>${esc(t('language'))}</b><small>${lang==='hi'?'हिंदी → English':'English → हिंदी'}</small></span></button>
-    <button class="tile" data-act="sign-out"><span class="ti">${ic('back')}</span><span><b>${esc(t('signOut'))}</b><small>${esc(S.email)}</small></span></button>
+    <button class="tile" data-act="leave-phone"><span class="ti">${ic('back')}</span><span><b>${esc(t('leavePhone'))}</b><small>${esc(t('leaveSub'))}</small></span></button>
   </div></div>`;
 }
 
-/* ---------- Sign in ---------- */
-function vSignIn(){
-  const a = S.auth;
-  const google = Backend.googleEnabled ? `<button type="button" class="btn primary" data-act="google" style="min-height:56px;font-size:17px">${GOOGLE_MARK}${esc(t('withGoogle'))}</button><div class="muted small" style="text-align:center">${esc(t('or'))}</div>` : '';
-  const body = a.step==='email'
-    ? `${google}<form class="f" id="authForm" novalidate><div class="field"><label for="authEmail">${esc(t('emailLabel'))}</label>
-        <input id="authEmail" type="email" inputmode="email" autocomplete="email" placeholder="${esc(t('emailPh'))}" value="${esc(a.email)}"></div>
-        ${a.err?`<div class="err">${esc(a.err)}</div>`:''}
-        <button class="btn ${Backend.googleEnabled?'':'primary'}" type="submit" style="min-height:56px;font-size:17px" ${a.busy?'disabled':''}>${esc(a.busy?t('sending'):t('sendLink'))}</button></form>`
-    : `<h3 style="font-size:19px">${esc(t('linkSentTitle'))}</h3><p style="margin:0">${esc(t('linkSent',{e:a.email}))}</p>
-        ${a.err?`<div class="err">${esc(a.err)}</div>`:''}
-        <button class="btn" type="button" data-act="auth-resend" ${a.busy?'disabled':''}>${esc(a.busy?t('sending'):t('sendAgain'))}</button>
-        <button class="btn ghost" type="button" data-act="auth-back">${esc(t('otherEmail'))}</button>`;
-  const banner = Backend.joinPending ? `<div class="notice" style="background:var(--good-bg)">${esc(t('invitedBanner'))}</div>` : '';
-  return `<section class="card authcard">${banner}<h2>${esc(t('signInTitle'))}</h2><p class="muted" style="margin:0">${esc(t(Backend.joinPending?'signInHintInvite':'signInHint'))}</p>${body}</section>`;
+/* ---------- Start or join (no email, no password) ---------- */
+function vGate(){
+  const g = S.gate; const starting = S.state==='start';
+  return `<section class="card authcard">
+    <h2>${esc(t(starting?'startTitle':'joinTitle'))}</h2>
+    <p class="muted" style="margin:0">${esc(t(starting?'startHint':'joinHint'))}</p>
+    <form class="f" id="gateForm" novalidate>
+      <div class="field"><label for="gName">${esc(t('yourName'))}</label>
+        <input id="gName" type="text" autocomplete="name" placeholder="${esc(t('yourNamePh'))}" value="${esc(g.name)}"></div>
+      ${starting ? '' : `<div class="field"><label for="gCode">${esc(t('familyCode'))}</label>
+        <input id="gCode" class="codebox" type="text" autocapitalize="characters" autocomplete="off" spellcheck="false" maxlength="9" placeholder="K7MP-Q4XT" value="${esc(g.code)}"></div>`}
+      ${g.err?`<div class="err">${esc(g.err)}</div>`:''}
+      <button class="btn primary" type="submit" style="min-height:56px;font-size:18px" ${g.busy?'disabled':''}>${esc(g.busy ? t(starting?'starting':'joining') : t(starting?'startBtn':'joinBtn'))}</button>
+    </form></section>`;
 }
-const GOOGLE_MARK = '<svg viewBox="0 0 24 24" aria-hidden="true" style="width:20px;height:20px"><path fill="#4285F4" d="M23.5 12.3c0-.8-.1-1.6-.2-2.3H12v4.5h6.5a5.6 5.6 0 0 1-2.4 3.6v3h3.9c2.3-2.1 3.5-5.2 3.5-8.8z"/><path fill="#34A853" d="M12 24c3.2 0 6-1.1 7.9-2.9l-3.9-3c-1.1.7-2.4 1.2-4 1.2-3.1 0-5.7-2.1-6.6-4.9h-4v3.1A12 12 0 0 0 12 24z"/><path fill="#FBBC05" d="M5.4 14.4a7.2 7.2 0 0 1 0-4.7V6.6h-4a12 12 0 0 0 0 10.8z"/><path fill="#EA4335" d="M12 4.8c1.7 0 3.3.6 4.5 1.8l3.4-3.4A12 12 0 0 0 1.4 6.6l4 3.1C6.3 6.9 8.9 4.8 12 4.8z"/></svg>';
-async function sendSignInLink(){
-  const a = S.auth;
-  a.busy = true; a.err = ''; render();
-  try { await Backend.auth.sendLink(a.email); a.step = 'sent'; }
-  catch (e) { a.err = (e?.status === 429 || /rate|too many/i.test(e?.message || '')) ? t('tooMany') : t('sendFail'); }
-  a.busy = false; render();
-}
-async function handleAuthSubmit(){
-  const a = S.auth; if (a.busy) return;
-  const email = ($('#authEmail')?.value || '').trim().toLowerCase(); a.email = email;
-  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)){ a.err = t('badEmail'); render(); return; }
-  await sendSignInLink();
+const GATE_ERRORS = { wrong_code:'wrongCode', too_many:'tooManyTries', anon_disabled:'anonOff', already_started:'alreadyStarted' };
+async function handleGateSubmit(){
+  const g = S.gate; if (g.busy) return;
+  g.name = ($('#gName')?.value || '').trim();
+  g.code = Backend.codes.format($('#gCode')?.value || '');
+  g.err = '';
+  if (!g.name){ g.err = t('needYourName'); render(); return; }
+  if (S.state==='join' && g.code.replace('-','').length !== 8){ g.err = t('needCode'); render(); return; }
+  g.busy = true; render();
+  try {
+    if (S.state==='start'){ S.justStarted = true; await Backend.access.startProject(g.name); }
+    else await Backend.access.join(g.code, g.name);
+  } catch (e) {
+    S.justStarted = false;
+    g.err = t(GATE_ERRORS[e?.code] || 'joinFail');
+    if (e?.code==='already_started'){ S.state = 'join'; }
+    g.busy = false; render();
+  }
 }
 
 /* ---------- Family & access ---------- */
@@ -634,79 +635,62 @@ async function loadMembers(){
   try { S.members = await Backend.members.list(); S.membersLoaded = true; } catch {}
   scheduleRender();
 }
+async function loadCodes(){
+  try { S.codes = await Backend.codes.list(); S.codesLoaded = true; } catch {}
+  scheduleRender();
+}
+const myMember = () => S.members.find(m => m.user_id === S.myId);
+const shareText = code => t('inviteMsg',{c:code, u:Backend.codes.link(code)});
+const CODE_INFO = { editor:['codeEditor','codeEditorSub'], viewer:['codeViewer','codeViewerSub'], owner:['codeOwner','codeOwnerSub'] };
+function codeBlock(c){
+  const owner = S.role==='owner'; const isOwnerCode = c.role==='owner'; const hidden = isOwnerCode && !S.showOwnerCode;
+  const [title, sub] = CODE_INFO[c.role];
+  return `<div class="invite ${c.role==='editor'?'fresh':''}">
+    <div><b style="font-size:17px">${esc(t(title))}</b><div class="small muted">${esc(t(sub))}</div></div>
+    <div class="code-big" aria-label="${esc(t(title))}">${hidden ? '••••-••••' : esc(c.code)}</div>
+    ${c.uses?`<div class="small muted">${esc(t('usedN',{n:c.uses}))}</div>`:''}
+    <div class="split">
+      ${hidden ? `<button class="btn sm" data-act="show-owner-code">${esc(t('showCode'))}</button>` : `
+      <button class="btn sm ${c.role==='editor'?'primary':''}" data-act="copy-code" data-code="${esc(c.code)}">${ic('copy')}${esc(t('copyLink'))}</button>
+      ${isOwnerCode ? `<button class="btn sm" data-act="hide-owner-code">${esc(t('hideCode'))}</button>` : `
+      <a class="btn sm" href="https://wa.me/?text=${encodeURIComponent(shareText(c.code))}" target="_blank" rel="noopener">${esc(t('whatsapp'))}</a>
+      ${navigator.share ? `<button class="btn sm" data-act="share-code" data-code="${esc(c.code)}">${esc(t('shareLink'))}</button>` : ''}`}`}
+      ${owner ? `<button class="btn sm danger" data-act="change-code" data-role="${c.role}">${esc(t('changeCode'))}</button>` : ''}
+    </div>
+  </div>`;
+}
 function vAccess(){
   if (!S.membersLoaded) loadMembers();
+  if (!S.codesLoaded && S.role!=='viewer') loadCodes();
   const owner = S.role === 'owner';
+  const order = {editor:1, viewer:2, owner:3};
+  const codes = [...S.codes].sort((a,b)=>order[a.role]-order[b.role]);
   return `<div class="stack">
   ${backBtn('go-more')}
   ${head(t('access'))}
-  <div class="notice">${esc(t('accessHint'))}</div>
-  ${owner ? vInviteCard() : ''}
-  ${owner ? `<section class="card"><h2 style="margin-bottom:12px">${esc(t('orByEmail'))}</h2>
-    <form class="f" id="memberForm" novalidate>
-      <div class="two"><div class="field"><label for="mEmail">${esc(t('memberEmail'))}</label><input id="mEmail" type="email" inputmode="email" placeholder="${esc(t('emailPh'))}"></div>
-      <div class="field"><label for="mName">${esc(t('memberName'))}</label><input id="mName" type="text"></div></div>
-      <div class="field"><div class="flabel">${esc(t('roleLabel'))}</div><div class="seg" role="radiogroup">
-        <label><input type="radio" name="mRole" value="editor" checked>${esc(t('roleEditor'))}</label>
-        <label><input type="radio" name="mRole" value="viewer">${esc(t('roleViewer'))}</label></div></div>
-      <div class="err" id="memberErr" hidden></div>
-      <button class="btn primary" type="submit">${ic('plus',2.4)}${esc(t('addMember'))}</button>
-    </form></section>` : ''}
-  <section class="card"><div class="list">${S.members.map(m=>`
+  ${codes.length ? `<section class="card" style="display:flex;flex-direction:column;gap:12px">
+    <h2>${esc(t('codesTitle'))}</h2><p class="small muted" style="margin:0">${esc(t('codesHint'))}</p>
+    ${codes.map(codeBlock).join('')}</section>` : `<div class="notice">${esc(t('accessHint'))}</div>`}
+  <section class="card"><div class="sec-head"><h2>${esc(t('peopleIn'))}</h2>
+    <button class="btn sm" data-act="edit-my-name">${ic('edit')}${esc(t('editName'))}</button></div>
+    <div class="list">${S.members.map(m=>`
     <div class="row" style="cursor:default;flex-wrap:wrap">
-      <div class="avatar">${esc(initials(m.name || m.email))}</div>
-      <div class="main"><div class="t">${esc(m.name || m.email.split('@')[0])}${m.email===S.email?` · ${esc(t('you'))}`:''}</div><div class="s">${esc(m.email)}</div>
-        <div style="margin-top:4px"><span class="pill ${m.user_id?'done':'todo'}">${esc(m.user_id?t('joined'):t('notJoined'))}</span></div></div>
+      <div class="avatar">${esc(initials(m.name || '?'))}</div>
+      <div class="main"><div class="t">${esc(m.name || t('someone'))}${m.user_id===S.myId?` · ${esc(t('you'))}`:''}</div>
+        <div class="s">${esc(t('joinedOn',{d:fmtDate((m.joined_at||'').slice(0,10))}))}</div></div>
       ${owner && m.role!=='owner' ? `<div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center">
-          <select data-member-role="${esc(m.email)}" aria-label="${esc(t('roleLabel'))}" style="width:auto">
+          <select data-member-role="${esc(m.user_id)}" aria-label="${esc(t('roleLabel'))}" style="width:auto">
             <option value="editor" ${m.role==='editor'?'selected':''}>${esc(t('roleEditor'))}</option>
             <option value="viewer" ${m.role==='viewer'?'selected':''}>${esc(t('roleViewer'))}</option></select>
-          <button class="btn sm danger" data-act="remove-member" data-email="${esc(m.email)}">${esc(t('remove'))}</button></div>`
+          <button class="btn sm danger" data-act="remove-member" data-user="${esc(m.user_id)}">${esc(t('remove'))}</button></div>`
         : `<span class="pill info">${esc(ROLE_LABEL(m.role))}</span>`}
     </div>`).join('')}</div></section></div>`;
 }
-async function loadInvites(){
-  try { S.invites = await Backend.invites.list(); S.invitesLoaded = true; } catch {}
-  scheduleRender();
-}
-const inviteMessage = url => t('inviteMsg',{u:url});
-function vInviteCard(){
-  if (!S.invitesLoaded) loadInvites();
-  const now = new Date();
-  const active = S.invites.filter(i => !i.revoked && new Date(i.expires_at) > now);
-  return `<section class="card" style="display:flex;flex-direction:column;gap:12px">
-    <h2>${esc(t('inviteTitle'))}</h2>
-    <p class="small muted" style="margin:0">${esc(t('inviteHint'))}</p>
-    <form class="f" id="inviteForm" novalidate>
-      <div class="field"><div class="flabel">${esc(t('inviteRole'))}</div><div class="seg" role="radiogroup">
-        <label><input type="radio" name="invRole" value="editor" checked>${esc(t('roleEditor'))}</label>
-        <label><input type="radio" name="invRole" value="viewer">${esc(t('roleViewer'))}</label></div></div>
-      <button class="btn primary" type="submit" style="min-height:52px">${ic('plus',2.4)}${esc(t('createInvite'))}</button>
-    </form>
-    ${active.map(i => { const url = Backend.invites.url(i.token); const fresh = i.token === S.newInvite;
-      return `<div class="invite ${fresh?'fresh':''}">
-        <div class="chips"><span class="pill info">${esc(ROLE_LABEL(i.role))}</span><span class="pill todo">${esc(t('expiresOn',{d:fmtDate(i.expires_at.slice(0,10))}))}</span>${i.uses?`<span class="pill done">${esc(t('joinedN',{n:i.uses}))}</span>`:''}</div>
-        <div class="phone"><span class="small" style="font-weight:500">${esc(url)}</span></div>
-        <div class="split">
-          <button class="btn sm primary" data-act="copy-invite" data-url="${esc(url)}">${ic('copy')}${esc(t('copyLink'))}</button>
-          <a class="btn sm" href="https://wa.me/?text=${encodeURIComponent(inviteMessage(url))}" target="_blank" rel="noopener">${esc(t('whatsapp'))}</a>
-          ${navigator.share ? `<button class="btn sm" data-act="share-invite" data-url="${esc(url)}">${esc(t('shareLink'))}</button>` : ''}
-          <button class="btn sm danger" data-act="turn-off-invite" data-token="${esc(i.token)}">${esc(t('turnOff'))}</button>
-        </div></div>`; }).join('')}
-  </section>`;
-}
-async function handleInviteSubmit(){
-  const role = document.querySelector('input[name=invRole]:checked')?.value || 'editor';
-  try { S.newInvite = await Backend.invites.create(role); await loadInvites(); }
-  catch { toast(t('saveFail')); }
-}
-async function handleMemberSubmit(){
-  const email = ($('#mEmail')?.value || '').trim().toLowerCase(); const name = ($('#mName')?.value || '').trim();
-  const role = document.querySelector('input[name=mRole]:checked')?.value || 'editor';
-  const err = $('#memberErr');
-  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)){ err.textContent = t('badEmail'); err.hidden = false; return; }
-  try { await Backend.members.add(email, name, role); toast(t('added')); await loadMembers(); }
-  catch { err.textContent = t('addFail'); err.hidden = false; }
+function myNameForm(){
+  openForm({ title:t('editName'), edit:true, values:{name: myMember()?.name || ''},
+    fields:[{key:'name', label:t('yourName'), ph:t('yourNamePh')}],
+    validate: v => !v.name.trim() ? t('needYourName') : '',
+    onSave: async v => { await Backend.members.setMyName(v.name.trim()); await loadMembers(); } });
 }
 
 /* ---------- Stages ---------- */
@@ -1197,25 +1181,27 @@ document.addEventListener('click', async ev => {
     case 'set-lang': lang = el.dataset.v==='hi'?'hi':'en'; langChosen = true; pref.set('lang', lang); render(); break;
     case 'scrim': case 'close': closeForm(); break;
     case 'go-more': go('more'); break;
-    case 'sign-out': Backend.auth.signOut(); break;
-    case 'google': Backend.auth.google().catch(()=>{ S.auth.err = t('sendFail'); render(); }); break;
-    case 'auth-back': S.auth = {step:'email', email:S.auth.email, busy:false, err:''}; render(); break;
-    case 'auth-resend': if (!S.auth.busy) sendSignInLink(); break;
-    case 'copy-invite': {
-      const url = el.dataset.url;
-      try { await navigator.clipboard.writeText(url); toast(t('linkCopied')); }
-      catch { const sp = el.closest('.invite')?.querySelector('.phone span'); if (sp){ const rg = document.createRange(); rg.selectNodeContents(sp); const sel = getSelection(); sel.removeAllRanges(); sel.addRange(rg); } }
+    case 'leave-phone': {
+      const label = el.querySelector('b');
+      if (armedDelete !== el){ armedDelete = el; label.textContent = t('leaveSure'); setTimeout(()=>{ if (armedDelete===el){ armedDelete=null; label.textContent=t('leavePhone'); } }, 4000); break; }
+      armedDelete = null; Backend.access.leaveThisPhone(); break; }
+    case 'copy-code': {
+      try { await navigator.clipboard.writeText(shareText(el.dataset.code)); toast(t('linkCopied')); }
+      catch { const sp = el.closest('.invite')?.querySelector('.code-big'); if (sp){ const rg = document.createRange(); rg.selectNodeContents(sp); const sel = getSelection(); sel.removeAllRanges(); sel.addRange(rg); } }
       break; }
-    case 'share-invite': navigator.share?.({ title: t('inviteTitle'), text: inviteMessage(el.dataset.url) }).catch(()=>{}); break;
-    case 'turn-off-invite': {
-      if (armedDelete !== el){ armedDelete = el; el.classList.add('armed'); el.textContent = t('turnOffSure'); setTimeout(()=>{ if (armedDelete===el){ armedDelete=null; el.classList.remove('armed'); el.textContent=t('turnOff'); } }, 4000); break; }
+    case 'share-code': navigator.share?.({ title: t('familyCode'), text: shareText(el.dataset.code) }).catch(()=>{}); break;
+    case 'show-owner-code': S.showOwnerCode = true; render(); break;
+    case 'hide-owner-code': S.showOwnerCode = false; render(); break;
+    case 'change-code': {
+      if (armedDelete !== el){ armedDelete = el; el.classList.add('armed'); el.textContent = t('changeSure'); setTimeout(()=>{ if (armedDelete===el){ armedDelete=null; el.classList.remove('armed'); el.textContent=t('changeCode'); } }, 4000); break; }
       armedDelete = null; el.disabled = true;
-      try { await Backend.invites.turnOff(el.dataset.token); toast(t('linkOff')); await loadInvites(); } catch { toast(t('saveFail')); el.disabled = false; }
+      try { await Backend.codes.reset(el.dataset.role); toast(t('codeChanged')); await loadCodes(); } catch { toast(t('saveFail')); el.disabled = false; }
       break; }
+    case 'edit-my-name': myNameForm(); break;
     case 'remove-member': {
       if (armedDelete !== el){ armedDelete = el; el.classList.add('armed'); el.textContent = t('removeSure'); setTimeout(()=>{ if (armedDelete===el){ armedDelete=null; el.classList.remove('armed'); el.textContent=t('remove'); } }, 4000); break; }
       armedDelete = null; el.disabled = true;
-      try { await Backend.members.remove(el.dataset.email); toast(t('removed')); await loadMembers(); } catch { toast(t('saveFail')); el.disabled = false; }
+      try { await Backend.members.remove(el.dataset.user); toast(t('removed')); await loadMembers(); } catch { toast(t('saveFail')); el.disabled = false; }
       break; }
     case 'edit-project': if (canWrite()) projectForm(); break;
     case 'add-expense': expenseForm(); break;
@@ -1327,9 +1313,7 @@ document.addEventListener('change', async ev => {
   if (el.dataset.memberRole){ try { await Backend.members.setRole(el.dataset.memberRole, el.value); toast(t('saved')); await loadMembers(); } catch { toast(t('saveFail')); } }
 });
 document.addEventListener('submit', ev => {
-  if (ev.target.id==='authForm'){ ev.preventDefault(); handleAuthSubmit(); }
-  if (ev.target.id==='memberForm'){ ev.preventDefault(); handleMemberSubmit(); }
-  if (ev.target.id==='inviteForm'){ ev.preventDefault(); handleInviteSubmit(); }
+  if (ev.target.id==='gateForm'){ ev.preventDefault(); handleGateSubmit(); }
 });
 document.addEventListener('keydown', ev => { if (ev.key==='Escape' && sheet) closeForm(); });
 window.addEventListener('hashchange', () => {
@@ -1358,9 +1342,13 @@ async function boot(){
   render();
   Backend.onFileUrls(scheduleRender);
   await Backend.start(async info => {
-    S.email = info.email || '';
-    if (info.state !== 'ready'){ if (info.linkError) S.auth.err = t('linkExpired'); S.inviteInvalid = !!info.inviteInvalid; S.state = info.state; render(); return; }
-    if (info.joined) setTimeout(()=>toast(t('joinedToast')), 600);
+    if (info.state !== 'ready'){
+      if (info.code) S.gate.code = info.code;
+      S.state = info.state === 'error' ? 'timeout' : info.state; render(); return;
+    }
+    S.gate.busy = false;
+    if (info.joined) setTimeout(()=>toast(t(S.justStarted ? 'welcomeOwner' : 'welcome')), 600);
+    if (S.justStarted){ S.keepDetail = false; location.hash = 'access'; }
     S.role = info.role; S.canWrite = info.role==='owner' || info.role==='editor';
     S.db = Backend.db; S.user = Backend.user; S.assets = S.canWrite ? Backend.assets : null;
     try { S.myId = await Backend.user.id(); } catch {}

@@ -10,119 +10,81 @@ It works on phones and computers, in English and हिंदी.
 - **Tasks and stages:** what needs doing next, and how far the build has got.
 - **Documents:** approvals, agreements, drawings, bills and warranties, with expiry reminders.
 - **Decisions:** tiles, colours and fittings, with photos, family votes and the final choice.
-- **Invite link:** send one link on WhatsApp, and family members join as soon as they sign in.
-- **Family & access:** only people you invite or add can open it. Each person is either "can add and edit" or "can only view".
+- **Join with a code:** no email and no password. Send the family code on WhatsApp; people type their name and they're in.
 
-It is a plain website (HTML, CSS and JavaScript, no build step). Data, sign-in and photos
-live in a free [Supabase](https://supabase.com) project. Hosting is free on GitHub Pages,
-Vercel, Netlify or Cloudflare Pages.
+It is a plain website (HTML, CSS and JavaScript, no build step). Data and photos live in a free
+[Supabase](https://supabase.com) project. Hosting is free on GitHub Pages, Vercel, Netlify or Cloudflare Pages.
 
 ---
 
-## Setup (about 15 minutes, one time, all free)
+## Setup (about 10 minutes, one time, all free)
 
 ### 1. Create the free database
 
 1. Go to [supabase.com](https://supabase.com), sign up, and click **New project**.
-   Pick the region closest to you (for India: **Mumbai**). Save the database password somewhere safe.
-2. When the project is ready, open **SQL Editor → New query**.
-3. Open [`supabase/schema.sql`](supabase/schema.sql) from this repo and copy all of it into the editor.
-4. On the **last line**, replace `YOUR-EMAIL@example.com` with the email you will sign in with.
-5. Click **Run**. You should see "Success". (Running it again later is safe.)
+   Pick the region closest to you (for India: **Mumbai**).
+2. When it is ready, open **SQL Editor → New query**.
+3. Copy all of [`supabase/schema.sql`](supabase/schema.sql) into the editor and click **Run**.
+   There is nothing to edit. Running it again later is safe and keeps your entries.
 
-### 2. Sign-in: nothing to set up for email links
+### 2. Turn on joining without email
 
-People sign in with a **link sent to their email**, with no password. This uses Supabase's
-standard email exactly as it comes, so it works on the free plan with no template changes.
+1. In Supabase, go to **Authentication → Sign In / Providers**.
+2. Switch on **Allow anonymous sign-ins** and click **Save**.
 
-The built-in sender only sends a few emails per hour. That is fine for a family, because
-each phone stays signed in after the first time. To remove the limit, turn on
-**Continue with Google** (see "Google sign-in" below). It is free and sends no emails at all.
+This gives each phone a private, nameless session. It cannot see anything until it joins
+with one of your codes. It sends no emails and is free.
 
 ### 3. Connect the app to the database
 
-1. In Supabase, open **Project Settings → API**.
-2. Copy the **Project URL** and the **anon public** key.
-3. Paste them into [`config.js`](config.js) in this repo and commit the change.
+1. In Supabase, open **Project Settings → API Keys**.
+2. Copy the **Project URL** and the **publishable** key (`sb_publishable_...`).
+3. Paste them into [`config.js`](config.js) and commit.
 
-These two values are meant to be public. The database rules only let signed-in people who
-are on your family list read or change anything. **Never** put the `service_role` key in this repo.
+Both values are meant to be public. **Never** put a secret key (`sb_secret_...` or `service_role`)
+in this repo. The app refuses to start if you do.
 
 ### 4. Put it online for free
 
-**Option A: GitHub Pages** (needs the repo to be public on a free GitHub account)
+**GitHub Pages** (needs the repo to be public on a free GitHub account):
 
 1. In this repo on GitHub, go to **Settings → Pages**.
 2. Under **Build and deployment**, set **Source** to **GitHub Actions**.
-3. Push to `main` (or open **Actions → Deploy to GitHub Pages → Run workflow**).
+3. Open **Actions → Deploy to GitHub Pages → Run workflow**. After this, every push to `main` redeploys.
 4. Your site will be at `https://<your-username>.github.io/<repo-name>/`.
 
-**Option B: Vercel** (works with a private repo)
+**Vercel / Netlify / Cloudflare Pages** (these work with a private repo): import the repo, use
+no build command, and publish the repo root.
 
-1. Sign in at [vercel.com](https://vercel.com) with GitHub and click **Add New → Project**.
-2. Import this repo. Leave every setting at its default (no build command) and click **Deploy**.
-3. Your site will be at `https://<project>.vercel.app`. Every push to `main` updates it.
+### 5. Start the project and invite the family
 
-Netlify and Cloudflare Pages work the same way as Vercel: import the repo, no build command,
-publish the repo root.
+1. Open your site **before you share it with anyone**. Choose a language, type your name, and tap
+   **Start my project**. The first person to do this becomes the owner.
+2. You land on **Family & access** with three codes:
+   - **Family code:** can add and edit. Send it to the family with the **WhatsApp** button.
+   - **View-only code:** can see everything but change nothing. For example, for a contractor.
+   - **Owner code:** keep it private. It gets you owner access back on a new phone.
+3. Family members open the link, type their name, and tap **Join**. The code is already filled in.
 
-### 5. Point sign-in links at your site
-
-In Supabase, go to **Authentication → URL Configuration**:
-- **Site URL:** your site address, for example `https://<your-username>.github.io/home-build-tracker/`
-- **Redirect URLs:** add the same address with `**` on the end, for example
-  `https://<your-username>.github.io/home-build-tracker/**`. The `**` lets invite links keep working through sign-in.
-
-Without this, the link in the sign-in email opens the wrong page.
-
-### 6. Invite the family
-
-1. Open your site, choose a language, and sign in with the email you put in `schema.sql`.
-2. Go to **More → Family & access → Invite link**. Choose what joiners can do:
-   - **Can add and edit** for family members who will enter expenses and diary.
-   - **Can only view** for anyone who should only look, such as a contractor.
-3. Tap **Create invite link**, then **WhatsApp** (or **Copy link**) and send it.
-4. They open the link, enter their email, tap the sign-in link in that email, and they're in.
-
-Each link works for 7 days. **Turn off** stops it at once, and the list shows who joined,
-so you can remove anyone. To add one specific person instead, use **Or add someone by email**.
+If a code reaches the wrong person, tap **Change code**: the old one stops working at once.
+You can also change anyone's role or remove them from the list.
 
 On a phone, use the browser menu → **Add to Home screen**, and it opens like an app.
 
 ---
 
-## Google sign-in (free, recommended for parents)
-
-It needs one tap, sends no email, and has no limit. Each person must use the Google account
-whose email is on your family list.
-
-1. Go to [console.cloud.google.com](https://console.cloud.google.com) and create a project (any name).
-2. Open **Google Auth Platform** (or **APIs & Services → OAuth consent screen**):
-   - **Branding:** app name `Our Home Build`, plus your email as the support and contact email.
-   - **Audience:** choose **External**, then click **Publish app** so any Google account can sign in.
-     Only basic sign-in details are used, so Google does not need to review it.
-3. Go to **Clients → Create client → Web application**:
-   - **Authorized JavaScript origins:** `https://<your-username>.github.io`
-   - **Authorized redirect URIs:** the **Callback URL** shown in Supabase under
-     **Authentication → Sign In / Providers → Google**. It looks like
-     `https://<project-ref>.supabase.co/auth/v1/callback`.
-4. Copy the **Client ID** and **Client secret** into that Supabase Google page, switch it on, and click **Save**.
-5. In `config.js`, set `GOOGLE_SIGN_IN: true` and commit.
-
-The sign-in screen then shows **Continue with Google** at the top, with email links underneath as a backup.
-
-## Optional: more sign-in emails
-
-To send more than a few email links per hour, connect a free email service under
-**Authentication → Emails → SMTP Settings**. For example, Brevo's free plan sends 300 emails a day.
-
 ## Good to know
 
+- **Each phone stays in** after joining. If someone clears their browser data or switches phones,
+  they just open the link again. **Leave on this phone** (under More) signs that phone out.
+- **Guessing is blocked:** codes have about a trillion possibilities, and each phone gets 10 wrong
+  tries an hour.
 - **Free plan limits:** 500 MB database and 1 GB of files, far more than one house needs.
   Supabase pauses a free project after 7 days with no use at all. Opening the app once a week
   avoids that, and a paused project can be restored from the dashboard.
 - **Backups:** Supabase → **Database → Backups**, or export the `records` table as CSV from the Table Editor.
-- **Photos and documents** are stored privately. Links to them expire after a few hours and only work for signed-in family members.
+- **Photos and documents** are stored privately. Links to them expire after a few hours and only
+  work for people in the project.
 
 ## Files
 
@@ -130,8 +92,8 @@ To send more than a few email links per hour, connect a free email service under
 |---|---|
 | `index.html`, `styles.css` | The page and its look |
 | `app.js` | All screens, forms and both languages |
-| `backend.js` | Talks to Supabase: data, live updates, sign-in, files |
-| `config.js` | Your Supabase address and public key |
+| `backend.js` | Talks to Supabase: data, live updates, joining with a code, files |
+| `config.js` | Your Supabase address and publishable key |
 | `supabase/schema.sql` | Database tables and access rules, run once |
 | `vendor/` | The Supabase browser library (v2.118.0), included so the site does not depend on a CDN |
 | `.github/workflows/pages.yml` | Free deploy to GitHub Pages |

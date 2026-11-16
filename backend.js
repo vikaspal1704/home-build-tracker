@@ -6,17 +6,20 @@
  *
  * Every record lives in one table, public.records (collection, id, data jsonb).
  * Who may read or write is decided in the database by row-level security,
- * using the public.members list (see supabase/schema.sql). The browser key in
- * config.js is public by design; it grants nothing without a signed-in member.
+ * using the public.members list (see supabase/schema.sql).
+ *
+ * No email or password: each phone gets a private anonymous Supabase session
+ * and joins the project with a family code (or starts it, the very first time).
+ * The browser key in config.js is public by design; it grants nothing until
+ * this phone has joined with a valid code.
  */
 (function () {
   const CFG = window.HOME_BUILD_CONFIG || {};
   const BUCKET = 'files';
-  function atobSafe(s) { try { return atob((s || '').replace(/-/g, '+').replace(/_/g, '/')); } catch { return ''; } }
   const SIGNED_URL_SECONDS = 60 * 60 * 6;
   const RELOAD_DEBOUNCE_MS = 150;
-  const JOIN_KEY = 'homebuild.join';
   const PIXEL = 'data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==';
+  function atobSafe(s) { try { return atob((s || '').replace(/-/g, '+').replace(/_/g, '/')); } catch { return ''; } }
 
   const isSecretKey = /^sb_secret_/.test(CFG.SUPABASE_ANON_KEY || '') || /service_role/.test(atobSafe((CFG.SUPABASE_ANON_KEY || '').split('.')[1]));
   if (isSecretKey) console.error('config.js holds a SECRET key. Use the publishable (or anon) key; the secret key must never be in a website.');
@@ -25,26 +28,20 @@
     ? window.supabase.createClient(CFG.SUPABASE_URL, CFG.SUPABASE_ANON_KEY, { auth: { persistSession: true, autoRefreshToken: true } })
     : null;
 
-  /* ---------- invite link: ?join=<token> ---------- */
-  // Kept in this browser until sign-in finishes, and carried through the
-  // sign-in email / Google round trip in the return address.
-  let joinToken = '';
-  (function readJoinToken() {
+  /* ---------- family code in the link: ?code=K7MP-Q4XT ---------- */
+  const CODE_RE = /[^A-Za-z0-9]/g;
+  const formatCode = raw => { const c = String(raw || '').replace(CODE_RE, '').toUpperCase().slice(0, 8); return c.length > 4 ? c.slice(0, 4) + '-' + c.slice(4) : c; };
+  let codeFromLink = '';
+  (function readCodeFromLink() {
     const params = new URLSearchParams(location.search);
-    const fromUrl = (params.get('join') || '').replace(/[^a-f0-9]/gi, '');
-    if (fromUrl) {
-      joinToken = fromUrl;
-      try { localStorage.setItem(JOIN_KEY, fromUrl); } catch {}
-      params.delete('join');
-      const rest = params.toString();
-      history.replaceState(null, '', location.pathname + (rest ? '?' + rest : '') + location.hash);
-    } else {
-      try { joinToken = localStorage.getItem(JOIN_KEY) || ''; } catch {}
-    }
+    const raw = params.get('code');
+    if (!raw) return;
+    codeFromLink = formatCode(raw);
+    params.delete('code');
+    const rest = params.toString();
+    history.replaceState(null, '', location.pathname + (rest ? '?' + rest : '') + location.hash);
   })();
-  const forgetJoinToken = () => { joinToken = ''; try { localStorage.removeItem(JOIN_KEY); } catch {} };
-  const returnAddress = () => location.origin + location.pathname + (joinToken ? '?join=' + encodeURIComponent(joinToken) : '');
-  const inviteUrl = token => location.origin + location.pathname + '?join=' + encodeURIComponent(token);
+  const joinLink = code => location.origin + location.pathname + '?code=' + encodeURIComponent(code);
 
   /* ---------- live collections ---------- */
   const listeners = new Map();   // collection -> Set<{next, err}>
@@ -129,8 +126,8 @@
     async profiles(ids) {
       const want = [...new Set([].concat(ids))].filter(id => id && !(id in profileCache));
       if (want.length) {
-        const { data } = await sb.from('members').select('user_id,name,email').in('user_id', want);
-        (data || []).forEach(m => { profileCache[m.user_id] = { id: m.user_id, name: m.name || (m.email || '').split('@')[0] }; });
+        const { data } = await sb.from('members').select('user_id,name').in('user_id', want);
+        (data || []).forEach(m => { profileCache[m.user_id] = { id: m.user_id, name: m.name || '' }; });
         want.forEach(id => { if (!(id in profileCache)) profileCache[id] = { id, name: '' }; });
       }
       return Object.fromEntries([].concat(ids).map(id => [id, profileCache[id] || { id, name: '' }]));
@@ -164,93 +161,85 @@
     }
   };
 
-  /* ---------- family & access list ---------- */
+  /* ---------- people in the project, and the join codes ---------- */
   const members = {
     async list() {
-      const { data, error } = await sb.from('members').select('email,name,role,user_id').order('added_at');
+      const { data, error } = await sb.from('members').select('user_id,name,role,joined_at').order('joined_at');
       fail(error); return data || [];
     },
-    async add(email, name, newRole) {
-      const { error } = await sb.from('members').insert({ email: email.trim().toLowerCase(), name: name.trim(), role: newRole });
-      fail(error);
-    },
-    async setRole(email, newRole) { const { error } = await sb.from('members').update({ role: newRole }).eq('email', email); fail(error); },
-    async remove(email) { const { error } = await sb.from('members').delete().eq('email', email); fail(error); }
+    async setRole(userId, newRole) { const { error } = await sb.from('members').update({ role: newRole }).eq('user_id', userId); fail(error); },
+    async remove(userId) { const { error } = await sb.from('members').delete().eq('user_id', userId); fail(error); },
+    async setMyName(name) { const { error } = await sb.rpc('set_my_name', { p_name: name }); fail(error); }
   };
-
-  /* ---------- invite links (owner) ---------- */
-  const invites = {
+  const codes = {
     async list() {
-      const { data, error } = await sb.from('invites').select('token,role,expires_at,revoked,uses,created_at').order('created_at', { ascending: false });
+      const { data, error } = await sb.from('join_codes').select('role,code,uses');
       fail(error); return data || [];
     },
-    async create(role) {
-      const { data, error } = await sb.rpc('create_invite', { p_role: role, p_days: 7 });
-      fail(error); return data;
-    },
-    async turnOff(token) { const { error } = await sb.from('invites').update({ revoked: true }).eq('token', token); fail(error); },
-    url: inviteUrl
+    async reset(forRole) { const { data, error } = await sb.rpc('reset_join_code', { p_role: forRole }); fail(error); return data; },
+    link: joinLink,
+    format: formatCode
   };
 
-  /* ---------- sign in ---------- */
-  const auth = {
-    // Supabase's standard (free) email contains a sign-in link back to this page.
-    async sendLink(email) {
-      const { error } = await sb.auth.signInWithOtp({
-        email: email.trim().toLowerCase(),
-        options: { shouldCreateUser: true, emailRedirectTo: returnAddress() }
-      });
-      fail(error);
+  /* ---------- joining ---------- */
+  // An anonymous session is created only when someone actually joins or starts.
+  async function ensureSession() {
+    if (session) return;
+    const { data, error } = await sb.auth.signInAnonymously();
+    if (error) { const e = new Error(error.message); e.code = /anonymous/i.test(error.message || '') ? 'anon_disabled' : 'signin_failed'; throw e; }
+    session = data.session;
+  }
+  let reportReady = null;
+  async function finishJoin(newRole) {
+    role = newRole;
+    reportReady && reportReady({ state: 'ready', role, joined: true });
+  }
+  const access = {
+    async startProject(name) {
+      await ensureSession();
+      const { data, error } = await sb.rpc('start_project', { p_name: name });
+      if (error) { const e = new Error(error.message); e.code = /already started/i.test(error.message) ? 'already_started' : 'failed'; throw e; }
+      await finishJoin(data);
     },
-    async google() {
-      const { error } = await sb.auth.signInWithOAuth({ provider: 'google', options: { redirectTo: returnAddress() } });
-      fail(error);
+    async join(code, name) {
+      await ensureSession();
+      const { data, error } = await sb.rpc('join_project', { p_code: code, p_name: name });
+      if (error) { const e = new Error(error.message); e.code = /too many/i.test(error.message) ? 'too_many' : 'failed'; throw e; }
+      if (!data) { const e = new Error('wrong code'); e.code = 'wrong_code'; throw e; }
+      await finishJoin(data);
     },
-    async signOut() { await sb.auth.signOut(); location.hash = ''; location.reload(); }
+    // Leaves the project on this phone only. Joining again needs a code.
+    async leaveThisPhone() { await sb.auth.signOut(); location.hash = ''; location.reload(); }
   };
 
   /*
    * start(onState) reports one of:
-   *   {state:'setup'}                      config.js not filled in yet
-   *   {state:'signin'}                     nobody signed in on this device
-   *   {state:'noaccess', email}            signed in, but not on the family list
-   *   {state:'ready', email, role}         signed in member; db/user/assets usable
+   *   {state:'setup'}                       config.js not filled in yet
+   *   {state:'start'}                       nobody has started the project: offer "Start my project"
+   *   {state:'join', code}                  project exists, this phone has not joined: ask for name + code
+   *   {state:'ready', role, joined}         this phone is in the project; db/user/assets usable
    */
-  // A sign-in link that expired or was already used comes back as #error=...
-  const linkError = /(^|[#&])error(_code)?=/.test(location.hash);
-  if (linkError) history.replaceState(null, '', location.pathname + location.search);
-
   async function start(onState) {
     if (!sb) { onState({ state: 'setup' }); return; }
-    let reported = null;
-    const resolve = async s => {
-      session = s;
-      if (!s) { role = null; if (reported !== 'signin') { reported = 'signin'; onState({ state: 'signin', linkError }); } return; }
-      const email = s.user.email || '';
-      const displayName = s.user.user_metadata?.full_name || s.user.user_metadata?.name || '';
-      const { data, error } = await sb.rpc('claim_membership', { display_name: displayName });
-      role = error ? null : data;
-      let joined = false, inviteInvalid = false;
-      if (!role && joinToken) {
-        const res = await sb.rpc('accept_invite', { p_token: joinToken, display_name: displayName });
-        role = res.error ? null : res.data;
-        joined = !!role; inviteInvalid = !role;
-      }
-      if (joinToken && (role || inviteInvalid)) forgetJoinToken();
-      const next = role ? 'ready' : 'noaccess';
-      if (reported === next) return;
-      reported = next;
-      onState({ state: next, email, role, joined, inviteInvalid });
-    };
+    reportReady = onState;
     const { data } = await sb.auth.getSession();
-    await resolve(data.session);
-    sb.auth.onAuthStateChange((_event, s) => { if ((s?.user?.id || null) !== (session?.user?.id || null)) resolve(s); else session = s; });
+    session = data.session;
+    if (session) {
+      const res = await sb.rpc('my_role');
+      role = res.error ? null : res.data;
+      if (role) {
+        // A link with a higher code (e.g. the owner code on a new phone) still upgrades.
+        if (codeFromLink) { try { const up = await sb.rpc('join_project', { p_code: codeFromLink, p_name: '' }); if (up.data) role = up.data; } catch {} }
+        onState({ state: 'ready', role, joined: false }); return;
+      }
+    }
+    const status = await sb.rpc('project_status');
+    if (status.error) { onState({ state: 'error' }); return; }
+    onState(status.data === 'new' && !codeFromLink ? { state: 'start' } : { state: 'join', code: codeFromLink });
   }
 
   window.Backend = {
-    configured, start, db, user, assets, members, invites, auth,
-    get joinPending() { return !!joinToken; },
-    fileUrl, onFileUrls(fn) { onUrls = fn; },
-    googleEnabled: !!CFG.GOOGLE_SIGN_IN
+    configured, start, db, user, assets, members, codes, access,
+    fileUrl, onFileUrls(fn) { onUrls = fn; }
   };
 })();
